@@ -35,6 +35,9 @@ nav a.current {
   text-decoration: none;
   border-right: 3px solid rgb(244, 128, 36);
   font-weight: 700;
+  display: block;
+  padding-left: 8px;
+  line-height: 31px;
 }
 
 h1 {
