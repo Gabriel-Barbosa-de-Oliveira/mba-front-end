@@ -36,3 +36,30 @@ h1 {
   font-size: 27px;
   font-weight: 400;
 }
+
+.panel {
+  border: 1px solid rgb(214, 217, 220);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 4px 0px, rgba(0, 0, 0, 0.05) 0px 2px 8px 0px;
+  margin-bottom: 16px;
+  width: 298px;
+  border-radius: 3px;
+}
+
+.panel > h2 {
+  background-color: #fafafb;
+  margin: 0;
+  padding: 12px 15px;
+  font-size: 15px;
+  font-weight: 400;
+  border-bottom: 1px solid rgb(214, 217, 220);
+}
+
+.panel > div {
+  padding: 12px 15px;
+}
+
+footer {
+  background-color: rgb(36, 39, 41);
+  color: rgb(106, 115, 124);
+}
