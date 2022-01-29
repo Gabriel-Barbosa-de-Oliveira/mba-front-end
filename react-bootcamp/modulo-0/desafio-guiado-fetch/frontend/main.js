@@ -62,6 +62,7 @@ async function onSubmit(evt) {
   const i = employees.indexOf(selectedItem);
   employees[i] = updatedItem;
   renderData();
+  selectItem(updatedItem, listEl.children[i])
 }
 
 function renderRoles() {
