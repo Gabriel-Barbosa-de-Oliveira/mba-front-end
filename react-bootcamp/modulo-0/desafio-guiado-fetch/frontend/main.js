@@ -17,7 +17,8 @@ async function init() {
     renderRoles();
     renderData();
     clearSelection();
-    bcancel.addEventListener("click", clearSelection)
+    bcancel.addEventListener("click", clearSelection);
+    formEl.addEventListener("submit", onSubmit)
   } catch (erro) {
     showError(erro);
   }
@@ -49,6 +50,20 @@ function clearSelection() {
   bcancel.style.display = "none";
 }
 
+async function onSubmit(evt) {
+  evt.preventDefault();
+  const employeeData = {
+    name: formEl.name.value,
+    salary: formEl.salary.valueAsNumber,
+    role_id: +formEl.role_id.value
+  }
+
+  const updatedItem = await updateEmployee(selectedItem.id, employeeData);
+  const i = employees.indexOf(selectedItem);
+  employees[i] = updatedItem;
+  renderData();
+}
+
 function renderRoles() {
   for (const role of roles) {
     const option = document.createElement("option");
@@ -59,6 +74,7 @@ function renderRoles() {
 }
 
 function renderData() {
+  listEl.innerHTML = "";
   for (const employee of employees) {
     let role = roles.find((role) => role.id == employee.role_id);
     const li = document.createElement("li");
