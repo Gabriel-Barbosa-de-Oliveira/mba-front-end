@@ -1,7 +1,12 @@
 let employees = [];
 let roles = [];
+let selectedItem;
 const listEl = document.querySelector('ul');
 const formEl = document.querySelector('form');
+const bdelete = document.getElementById("bdelete")
+const bcancel = document.getElementById("bcancel")
+const bsubmit = document.getElementById("bcreate")
+
 
 async function init() {
   try {
@@ -9,12 +14,49 @@ async function init() {
       listEmployees(),
       listRoles()
     ]);
+    renderRoles();
     renderData();
+    clearSelection();
+    bcancel.addEventListener("click", clearSelection)
   } catch (erro) {
     showError(erro);
   }
 }
 init();
+
+function selectItem(employee, li) {
+  clearSelection();
+  selectedItem = employee;
+  li.classList.add("selected");
+  formEl.name.value = employee.name;
+  formEl.salary.valueAsNumber = employee.salary;
+  formEl.role_id.value = employee.role_id;
+  bdelete.style.display = "inline";
+  bcancel.style.display = "inline";
+}
+
+function clearSelection() {
+  selectedItem = undefined;
+  const li = listEl.querySelector(".selected");
+  if (li) {
+    li.classList.remove("selected")
+  }
+
+  formEl.name.value = "";
+  formEl.salary.value = "";
+  formEl.role_id.value = "";
+  bdelete.style.display = "none";
+  bcancel.style.display = "none";
+}
+
+function renderRoles() {
+  for (const role of roles) {
+    const option = document.createElement("option");
+    option.textContent = role.name;
+    option.value = role.id;
+    formEl.role_id.appendChild(option);
+  }
+}
 
 function renderData() {
   for (const employee of employees) {
@@ -27,8 +69,10 @@ function renderData() {
     li.appendChild(divName);
     li.appendChild(divRole);
     listEl.appendChild(li);
+    li.addEventListener("click", () => selectItem(employee, li))
   }
 }
+
 
 function showError(error) {
   document.getElementById("errors").textContent = "Erro ao carregar dados.";
