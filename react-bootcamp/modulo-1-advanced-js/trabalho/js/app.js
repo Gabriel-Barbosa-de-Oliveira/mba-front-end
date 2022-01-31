@@ -1,3 +1,7 @@
+let products = [];
+let selectedItem;
+const listEl = document.getElementsByClassName('catalog');
+
 //EXEMPLO DO CÓDIGO PARA UM PRODUTO
 function productItem(product) {
   const item = `<div class="product" data-name="NYX Mosaic Powder Blush Paradise" data-brand="nyx" data-type="bronzer" tabindex="508">
@@ -45,8 +49,24 @@ function loadDetails(product) {
 
 
 async function init() {
-  const teste = await listProducts()
-  console.log(teste)
+  console.log(listEl)
+  products = await listProducts();
+  renderData();
 }
 
 init();
+
+function renderData() {
+  listEl.innerHTML = "";
+  products.forEach((product, index) => {
+    if (index < 10) {
+      const ul = document.createElement("ul");
+      const li = document.createElement("div");
+      const divName = document.createElement("div");
+      divName.textContent = product.name;
+      li.appendChild(divName);
+      ul.appendChild(li);
+      listEl[0].appendChild(li);
+    }
+  });
+}
