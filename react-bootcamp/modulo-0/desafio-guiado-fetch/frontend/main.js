@@ -9,20 +9,17 @@ const bsubmit = document.getElementById("bsubmit")
 
 
 async function init() {
-  try {
-    [employees, roles] = await Promise.all([
-      listEmployees(),
-      listRoles()
-    ]);
-    renderRoles();
-    renderData();
-    clearSelection();
-    bcancel.addEventListener("click", clearSelection);
-    formEl.addEventListener("submit", onSubmit)
-  } catch (erro) {
-    showError("Error loading data", erro);
-  }
+  [employees, roles] = await Promise.all([
+    listEmployees(),
+    listRoles()
+  ]);
+  renderRoles();
+  renderData();
+  clearSelection();
+  bcancel.addEventListener("click", clearSelection);
+  formEl.addEventListener("submit", onSubmit)
 }
+
 init();
 
 function selectItem(employee, li) {
