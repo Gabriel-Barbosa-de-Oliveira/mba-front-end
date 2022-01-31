@@ -11,16 +11,18 @@ function fetchJson(url, options) {
   })
 }
 
+const baseUrl = 'http://localhost:3000/'
+
 function listEmployees() {
-  return fetchJson("http://localhost:3000/employees")
+  return fetchJson(`${baseUrl}/employees`)
 }
 
 function listRoles() {
-  return fetchJson("http://localhost:3000/roles")
+  return fetchJson(`${baseUrl}/roles`)
 }
 
 function updateEmployee(id, employee) {
-  return fetchJson(`http://localhost:3000/employees/${id}`, {
+  return fetchJson(`${baseUrl}/employees/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(employee),
@@ -28,10 +30,16 @@ function updateEmployee(id, employee) {
 }
 
 function createEmployee(employee) {
-  return fetchJson(`http://localhost:3000/employees`, {
+  return fetchJson(`${baseUrl}/employees`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(employee),
+  });
+}
+
+function deleteEmployee(id) {
+  return fetchJson(`${baseUrl}/employees/${id}`, {
+    method: "DELETE",
   });
 }
 

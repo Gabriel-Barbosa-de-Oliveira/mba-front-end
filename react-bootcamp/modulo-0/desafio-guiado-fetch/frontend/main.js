@@ -17,7 +17,9 @@ async function init() {
   renderData();
   clearSelection();
   bcancel.addEventListener("click", clearSelection);
-  formEl.addEventListener("submit", onSubmit)
+  bdelete.addEventListener("click", onDelete);
+  formEl.addEventListener("submit", onSubmit);
+
 }
 
 init();
@@ -84,6 +86,16 @@ function renderRoles() {
     option.textContent = role.name;
     option.value = role.id;
     formEl.role_id.appendChild(option);
+  }
+}
+
+async function onDelete() {
+  if (selectedItem) {
+    await deleteEmployee(selectedItem.id);
+    const i = employees.indexOf(selectedItem);
+    employees.splice(i, 1);
+    renderData();
+    clearSelection();
   }
 }
 
