@@ -42,3 +42,11 @@ function loadDetails(product) {
         </div>
       </div></section>`;
 }
+
+
+async function init() {
+  const teste = await listProducts()
+  console.log(teste)
+}
+
+init();
