@@ -24,3 +24,11 @@ function updateEmployee(id, employee) {
   });
 }
 
+function createEmployee(employee) {
+  return fetchJson(`http://localhost:3000/employees`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(employee),
+  });
+}
+

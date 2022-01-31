@@ -5,7 +5,7 @@ const listEl = document.querySelector('ul');
 const formEl = document.querySelector('form');
 const bdelete = document.getElementById("bdelete")
 const bcancel = document.getElementById("bcancel")
-const bsubmit = document.getElementById("bcreate")
+const bsubmit = document.getElementById("bsubmit")
 
 
 async function init() {
@@ -20,7 +20,7 @@ async function init() {
     bcancel.addEventListener("click", clearSelection);
     formEl.addEventListener("submit", onSubmit)
   } catch (erro) {
-    showError(erro);
+    showError("Error loading data", erro);
   }
 }
 init();
@@ -34,9 +34,12 @@ function selectItem(employee, li) {
   formEl.role_id.value = employee.role_id;
   bdelete.style.display = "inline";
   bcancel.style.display = "inline";
+  bsubmit.textContent = "Update";
 }
 
 function clearSelection() {
+  clearError();
+  bsubmit.textContent = "Create";
   selectedItem = undefined;
   const li = listEl.querySelector(".selected");
   if (li) {
@@ -58,11 +61,24 @@ async function onSubmit(evt) {
     role_id: +formEl.role_id.value
   }
 
-  const updatedItem = await updateEmployee(selectedItem.id, employeeData);
-  const i = employees.indexOf(selectedItem);
-  employees[i] = updatedItem;
-  renderData();
-  selectItem(updatedItem, listEl.children[i])
+  if (!employeeData.name || !employeeData.salary || !employeeData.role_id) {
+    showError("You must fill all form fields");
+  } else {
+    if (selectedItem) {
+      const updatedItem = await updateEmployee(selectedItem.id, employeeData);
+      const i = employees.indexOf(selectedItem);
+      employees[i] = updatedItem;
+      renderData();
+      selectItem(updatedItem, listEl.children[i])
+    } else {
+      const createdItem = await createEmployee(employeeData);
+      employees.push(createdItem);
+      renderData();
+      selectItem(createdItem, listEl.lastChild);
+      listEl.lastChild.scrollIntoView();
+    }
+  }
+
 }
 
 function renderRoles() {
@@ -91,9 +107,15 @@ function renderData() {
 }
 
 
-function showError(error) {
-  document.getElementById("errors").textContent = "Erro ao carregar dados.";
-  console.error(error);
+function showError(message, error) {
+  document.getElementById("errors").textContent = message;
+  if (error) {
+    console.error(error);
+  }
+}
+
+function clearError() {
+  document.getElementById("errors").textContent = '';
 }
 
 /*
