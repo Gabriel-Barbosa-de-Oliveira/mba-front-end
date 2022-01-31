@@ -11,7 +11,7 @@ function fetchJson(url, options) {
   })
 }
 
-const baseUrl = 'http://localhost:3000/'
+const baseUrl = 'http://localhost:3000'
 
 function listEmployees() {
   return fetchJson(`${baseUrl}/employees`)
