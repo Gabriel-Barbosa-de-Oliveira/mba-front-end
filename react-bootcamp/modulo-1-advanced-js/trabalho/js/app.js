@@ -51,7 +51,7 @@ async function init() {
   products = await listProducts();
   activeProductList = cloneDeep(products);
   renderData();
-  // inputName
+  inputName.addEventListener("input", withDelay(renderBasedOnName, 500));
   inputBrand.addEventListener("change", renderBasedOnBrand);
   inputType.addEventListener("change", renderBasedOnType);
   inputSort.addEventListener("change", renderBasedOnSort);
@@ -191,7 +191,7 @@ function buildCustomOptions(array, input) {
 
 function renderBasedOnName() {
   const value = inputName.value
-  if (value !== 'all') {
+  if (value !== "") {
     queryName = `name=${value}`
   } else {
     queryName = "";
@@ -249,5 +249,13 @@ function queryNameBuilder() {
   }
 
   return queryName;
+}
+
+function withDelay(fn, delay) {
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(fn, delay);
+  };
 }
 
