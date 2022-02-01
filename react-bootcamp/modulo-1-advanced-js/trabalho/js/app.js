@@ -248,7 +248,7 @@ function renderBasedOnSort() {
 }
 
 function renderBestAvailablesOrder() {
-  activeProductList.sort((a, b) => a.rating.localeCompare(b.rating))
+  activeProductList.sort(function (a, b) { return b.rating - a.rating })
   renderData();
 }
 function renderMinorPricesOrder() {
