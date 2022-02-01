@@ -1,6 +1,8 @@
 let products = [];
+let activeProductList = [];
 let brands = [];
 let types = [];
+let initialState = true;
 
 const listEl = document.getElementsByClassName('catalog');
 const inputName = document.getElementById('filter-name');
@@ -44,11 +46,16 @@ function loadDetails(product) {
 
 async function init() {
   products = await listProducts();
+  activeProductList = cloneDeep(products);
   renderData();
   // inputName
   inputBrand.addEventListener("change", renderBasedOnBrand);
   inputType.addEventListener("change", renderBasedOnType);
   inputSort.addEventListener("change", renderBasedOnSort);
+}
+
+function cloneDeep(json) {
+  return JSON.parse(JSON.stringify(json));
 }
 
 init();
@@ -144,15 +151,24 @@ function currencyFormatter(priceString) {
 }
 
 function renderData() {
-  listEl.innerHTML = "";
-  products.forEach((product) => {
+  listEl[0].innerHTML = "";
+  activeProductList.forEach((product) => {
     listEl[0].appendChild(renderProductItem(product));
-    pushOnlyUniqueStringValueToArray(product.brand, brands)
-    pushOnlyUniqueStringValueToArray(product.product_type, types)
+    if (initialState) {
+      pushOnlyUniqueStringValueToArray(product.brand, brands)
+      pushOnlyUniqueStringValueToArray(product.product_type, types)
+    }
   });
 
-  buildCustomOptions(brands, inputBrand)
-  buildCustomOptions(types, inputType)
+  buildOptionsWhenPageInits();
+  initialState = false;
+}
+
+function buildOptionsWhenPageInits() {
+  if (initialState) {
+    buildCustomOptions(brands, inputBrand);
+    buildCustomOptions(types, inputType);
+  }
 }
 
 function pushOnlyUniqueStringValueToArray(value, array) {
@@ -172,7 +188,13 @@ function buildCustomOptions(array, input) {
 }
 
 function renderBasedOnBrand() {
-  console.log("chamou brand")
+  const value = inputBrand.value
+  if (value != "all") {
+    activeProductList = products.filter(product => product.brand === value);
+  } else {
+    activeProductList = cloneDeep(products);
+  }
+  renderData();
 }
 
 function renderBasedOnType() {
