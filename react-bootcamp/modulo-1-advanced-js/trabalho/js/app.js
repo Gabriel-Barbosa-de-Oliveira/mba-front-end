@@ -106,9 +106,7 @@ function renderProductItem(product) {
 
 function renderData() {
   listEl.innerHTML = "";
-  listEl[0].appendChild(renderProductItem(products[0]));
-
-  // products.forEach((product, index) => {
-  //   listEl[0].appendChild(renderProductItem(product));
-  // });
+  products.forEach((product) => {
+    listEl[0].appendChild(renderProductItem(product));
+  });
 }
