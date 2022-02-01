@@ -20,3 +20,7 @@ const path = 'api/v1/products.json'//online
 function listProducts() {
   return fetchJson(`${baseUrl}${path}`)
 }
+
+function listProductsWithQuery(query) {
+  return fetchJson(`${baseUrl}${path}?${query}`)
+}

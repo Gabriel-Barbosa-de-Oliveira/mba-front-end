@@ -3,6 +3,9 @@ let activeProductList = [];
 let brands = [];
 let types = [];
 let initialState = true;
+let queryBrand = "";
+let queryTypes = "";
+let queryName = "";
 
 const listEl = document.getElementsByClassName('catalog');
 const inputName = document.getElementById('filter-name');
@@ -186,20 +189,65 @@ function buildCustomOptions(array, input) {
   }
 }
 
+function renderBasedOnName() {
+  const value = inputName.value
+  if (value !== 'all') {
+    queryName = `name=${value}`
+  } else {
+    queryName = "";
+  }
+  getProductsBasedOnQuery();
+}
 function renderBasedOnBrand() {
   const value = inputBrand.value
-  if (value != "all") {
-    activeProductList = products.filter(product => product.brand === value);
+  if (value !== 'all') {
+    queryBrand = `brand=${value}`
   } else {
-    activeProductList = cloneDeep(products);
+    queryBrand = "";
   }
-  renderData();
+  getProductsBasedOnQuery();
 }
 
 function renderBasedOnType() {
-  console.log("chamou tyoe")
+  const value = inputType.value
+  if (value !== 'all') {
+    queryTypes = `product_type=${value}`
+  } else {
+    queryTypes = "";
+  }
+  getProductsBasedOnQuery();
 }
 
 function renderBasedOnSort() {
   console.log("chamou sort")
 }
+
+async function getProductsBasedOnQuery() {
+
+  activeProductList = await listProductsWithQuery(queryBuilder());
+  renderData();
+}
+
+function queryBuilder() {
+  return queryBrandBuilder() + queryTypesBuilder() + queryNameBuilder();
+}
+
+function queryBrandBuilder() {
+  return queryBrand;
+}
+
+function queryTypesBuilder() {
+  if (queryBrand !== "" && queryTypes !== "") {
+    return `&${queryTypes}`
+  }
+
+  return queryTypes;
+}
+function queryNameBuilder() {
+  if ((queryBrand !== "" || queryTypes !== "") && queryName !== "") {
+    return `&${queryName}`
+  }
+
+  return queryName;
+}
+
