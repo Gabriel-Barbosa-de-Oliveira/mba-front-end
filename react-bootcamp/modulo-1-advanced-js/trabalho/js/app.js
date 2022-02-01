@@ -43,27 +43,38 @@ async function init() {
 
 init();
 
-function productItem(product) {
-  return item = `<div class="product" data-name="NYX Mosaic Powder Blush Paradise" data-brand="nyx" data-type="bronzer" tabindex="508">
-  <figure class="product-figure">
-    <img src="https://d3t32hsnjxo7q6.cloudfront.net/i/deedb7bd74bda43f062a09aab2ee1ec8_ra,w158,h184_pa,w158,h184.png" width="215" height="215" alt="NYX Mosaic Powder Blush Paradise" onerror="javascript:this.src='img/unavailable.png'">
-  </figure>
-  <section class="product-description">
-    <h1 class="product-name">NYX Mosaic Powder Blush Paradise</h1>
-    <div class="product-brands"><span class="product-brand background-brand">Nyx</span>
-    <span class="product-brand background-price">R$ 57.70</span></div>
-  </section>
-  // CARREGAR OS DETALHES
-</div>`;
-}
 
 function renderProductItem(product) {
+  const container = createContainerComponent(product);
+  const figure = createImageComponent(product)
+  const sectionDescription = createDescriptionContainer();
+  const h1 = createH1Component(product);
+  const divProductBrands = createDivProductBrandsComponent();
+  const divProductBrandsSpan = createDivProductBrandsSpanComponent(product);
+  const spanPrice = createSpanPriceComponent(product);
+
+  divProductBrands.appendChild(divProductBrandsSpan);
+  divProductBrands.appendChild(spanPrice);
+  sectionDescription.appendChild(h1);
+  sectionDescription.appendChild(divProductBrands);
+  //colocar detalhes
+  container.appendChild(figure);
+  container.appendChild(sectionDescription);
+
+  return container;
+}
+
+function createContainerComponent(product) {
   const container = document.createElement('div');
   container.className = 'product'
   container.setAttribute('data-name', product.name);
   container.setAttribute('data-brand', product.brand);
   container.setAttribute('data-type', product.product_type);
   container.setAttribute('tabindex', 508);
+  return container;
+}
+
+function createImageComponent(product) {
   const figure = document.createElement('figure');
   figure.className = "product-figure";
   const img = document.createElement('img');
@@ -73,36 +84,42 @@ function renderProductItem(product) {
   img.setAttribute('alt', product.name);
   img.setAttribute('onerror', "javascript:this.src='img/unavailable.png'")
   figure.appendChild(img);
+  return figure;
+}
 
+function createDescriptionContainer() {
   const sectionDescription = document.createElement('section')
   sectionDescription.className = "product-description";
+  return sectionDescription;
+}
 
+function createH1Component(product) {
   const h1 = document.createElement('h1');
   h1.className = "product-name";
   h1.textContent = product.name;
+  return h1;
+}
 
+function createDivProductBrandsComponent() {
   const divProductBrands = document.createElement('div');
   divProductBrands.className = "product-brands";
+  return divProductBrands;
+}
 
-  const divProductBrandsSpan = document.createElement('span')
+function createDivProductBrandsSpanComponent(product) {
+  const divProductBrandsSpan = document.createElement('span');
   divProductBrandsSpan.className = "product-brand background-brand";
   divProductBrandsSpan.textContent = product.brand;
+  return divProductBrandsSpan;
+}
 
+function createSpanPriceComponent(product) {
   const spanPrice = document.createElement('span');
   spanPrice.className = "product-brand background-price";
   spanPrice.textContent = product.price;
-
-  divProductBrands.appendChild(divProductBrandsSpan);
-  divProductBrands.appendChild(spanPrice);
-
-  sectionDescription.appendChild(h1);
-  sectionDescription.appendChild(divProductBrands);
-
-  container.appendChild(figure);
-  container.appendChild(sectionDescription);
-
-  return container;
+  return spanPrice;
 }
+
 
 function renderData() {
   listEl.innerHTML = "";
