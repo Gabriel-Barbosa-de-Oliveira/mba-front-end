@@ -13,40 +13,6 @@ const inputBrand = document.getElementById('filter-brand');
 const inputType = document.getElementById('filter-type');
 const inputSort = document.getElementById('sort-type');
 
-//EXEMPLO DO CÓDIGO PARA OS DETALHES DE UM PRODUTO
-function loadDetails(product) {
-  let details = `
-  <section class="product-details">
-    <div class="details-row">
-        <div>Brand</div>
-        <div class="details-bar">
-        <div class="details-bar-bg" style="width= 250">nyx</div>
-        </div>
-        </div><div class="details-row">
-        <div>Price</div>
-        <div class="details-bar">
-        <div class="details-bar-bg" style="width= 250">10.49</div>
-        </div>
-        </div><div class="details-row">
-        <div>Rating</div>
-        <div class="details-bar">
-        <div class="details-bar-bg" style="width= 250">5</div>
-        </div>
-        </div><div class="details-row">
-        <div>Category</div>
-        <div class="details-bar">
-        <div class="details-bar-bg" style="width= 250"></div>
-        </div>
-        </div><div class="details-row">
-        <div>Product_type</div>
-        <div class="details-bar">
-        <div class="details-bar-bg" style="width= 250">bronzer</div>
-        </div>
-    </div>
-  </section>`;
-}
-
-
 async function init() {
   products = await listProducts();
   activeProductList = cloneDeep(products);
@@ -267,8 +233,41 @@ function renderBasedOnType() {
 }
 
 function renderBasedOnSort() {
+  const methods = {
+    "1": () => { renderBestAvailablesOrder() },
+    "2": () => { renderMinorPricesOrder() },
+    "3": () => { renderBiggerPricesOrder() },
+    "4": () => { renderAlphabeticOrder() },
+    "5": () => { renderInverseAlphabeticOrder() },
+  }
+
+  const methodCall = methods[inputSort.value.toString()];
+  methodCall();
+
   console.log("chamou sort")
 }
+
+function renderBestAvailablesOrder() {
+  console.log("veio 1")
+}
+function renderMinorPricesOrder() {
+  console.log("veio 2")
+
+}
+function renderBiggerPricesOrder() {
+  console.log("veio 3")
+
+}
+function renderAlphabeticOrder() {
+  console.log("veio 4")
+
+}
+
+function renderInverseAlphabeticOrder() {
+  console.log("veio 5")
+}
+
+
 
 async function getProductsBasedOnQuery() {
   activeProductList = await listProductsWithQuery(queryBuilder());
