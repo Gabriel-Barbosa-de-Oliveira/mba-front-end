@@ -131,7 +131,6 @@ function createDivProductBrandsSpanComponent(product) {
 }
 
 function createSpanPriceComponent(product) {
-  debugger;
   const spanPrice = document.createElement('span');
   spanPrice.className = "product-brand background-price";
   const price = parseInt(getConvertedPrice(product)).toString();
