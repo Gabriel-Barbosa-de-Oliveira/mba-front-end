@@ -1,8 +1,10 @@
 let products = [];
 let selectedItem;
 const listEl = document.getElementsByClassName('catalog');
-
-//EXEMPLO DO CÓDIGO PARA UM PRODUTO
+const inputName = document.getElementById('filter-name');
+const inputBrand = document.getElementById('filter-brand');
+const inputType = document.getElementById('filter-type');
+const inputSort = document.getElementById('sort-type');
 
 //EXEMPLO DO CÓDIGO PARA OS DETALHES DE UM PRODUTO
 function loadDetails(product) {
