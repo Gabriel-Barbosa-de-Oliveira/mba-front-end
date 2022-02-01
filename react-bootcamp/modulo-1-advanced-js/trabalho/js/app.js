@@ -8,8 +8,10 @@ const inputSort = document.getElementById('sort-type');
 
 //EXEMPLO DO CÓDIGO PARA OS DETALHES DE UM PRODUTO
 function loadDetails(product) {
-  let details = `<section class="product-details"><div class="details-row">
-  <div>Brand</div>
+  let details = `
+  <section class="product-details">
+    <div class="details-row">
+        <div>Brand</div>
         <div class="details-bar">
         <div class="details-bar-bg" style="width= 250">nyx</div>
         </div>
@@ -33,7 +35,8 @@ function loadDetails(product) {
         <div class="details-bar">
         <div class="details-bar-bg" style="width= 250">bronzer</div>
         </div>
-        </div></section>`;
+    </div>
+  </section>`;
 }
 
 
@@ -116,12 +119,24 @@ function createDivProductBrandsSpanComponent(product) {
 }
 
 function createSpanPriceComponent(product) {
+  debugger;
   const spanPrice = document.createElement('span');
   spanPrice.className = "product-brand background-price";
-  spanPrice.textContent = product.price;
+  const price = parseInt(getConvertedPrice(product)).toString();
+  spanPrice.textContent = `${currencyFormatter(price)}`;
   return spanPrice;
 }
 
+function getConvertedPrice(product) {
+  return product.price ? product.price * 5.5 : 0;
+}
+
+function currencyFormatter(priceString) {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(priceString);
+}
 
 function renderData() {
   listEl.innerHTML = "";
