@@ -248,23 +248,27 @@ function renderBasedOnSort() {
 }
 
 function renderBestAvailablesOrder() {
-  console.log("veio 1")
+  activeProductList.sort((a, b) => a.rating.localeCompare(b.rating))
+  renderData();
 }
 function renderMinorPricesOrder() {
-  console.log("veio 2")
-
+  activeProductList.sort((a, b) => a.price.localeCompare(b.price))
+  renderData();
 }
+
 function renderBiggerPricesOrder() {
-  console.log("veio 3")
+  activeProductList.sort((a, b) => b.price.localeCompare(a.price))
+  renderData();
 
 }
 function renderAlphabeticOrder() {
-  console.log("veio 4")
-
+  activeProductList.sort((a, b) => a.name.localeCompare(b.name))
+  renderData();
 }
 
 function renderInverseAlphabeticOrder() {
-  console.log("veio 5")
+  activeProductList.sort((a, b) => b.name.localeCompare(a.name))
+  renderData();
 }
 
 
