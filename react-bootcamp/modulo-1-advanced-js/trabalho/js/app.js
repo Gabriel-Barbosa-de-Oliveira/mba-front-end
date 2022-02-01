@@ -45,6 +45,10 @@ function loadDetails(product) {
 async function init() {
   products = await listProducts();
   renderData();
+  // inputName
+  inputBrand.addEventListener("change", renderBasedOnBrand);
+  inputType.addEventListener("change", renderBasedOnType);
+  inputSort.addEventListener("change", renderBasedOnSort);
 }
 
 init();
@@ -165,4 +169,16 @@ function buildCustomOptions(array, input) {
     option.value = item;
     input.appendChild(option);
   }
+}
+
+function renderBasedOnBrand() {
+  console.log("chamou brand")
+}
+
+function renderBasedOnType() {
+  console.log("chamou tyoe")
+}
+
+function renderBasedOnSort() {
+  console.log("chamou sort")
 }
