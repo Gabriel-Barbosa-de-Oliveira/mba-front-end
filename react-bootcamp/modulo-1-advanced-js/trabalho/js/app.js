@@ -77,12 +77,13 @@ function renderProductItem(product) {
   divProductBrands.appendChild(spanPrice);
   sectionDescription.appendChild(h1);
   sectionDescription.appendChild(divProductBrands);
-  //colocar detalhes
   container.appendChild(figure);
   container.appendChild(sectionDescription);
+  container.appendChild(renderDetails(product));
 
   return container;
 }
+
 
 function createContainerComponent(product) {
   const container = document.createElement('div');
@@ -151,6 +152,53 @@ function currencyFormatter(priceString) {
     currency: 'BRL',
   }).format(priceString);
 }
+
+function renderDetails(product) {
+  const productDetails = document.createElement('section');
+  productDetails.className = "product-details";
+  const brand = renderDetailsRow('Brand', product.brand);
+  const formattedPrice = parseInt(getConvertedPrice(product)).toString();
+  const price = renderDetailsRow('Price', currencyFormatter(formattedPrice));
+  const rating = renderDetailsRow('Rating', product.rating);
+  const category = renderDetailsRow('Category', product.category);
+  const product_type = renderDetailsRow('Product Type', product.product_type);
+  if (product.brand) {
+    productDetails.appendChild(brand)
+  }
+  if (product.price) {
+    productDetails.appendChild(price)
+  }
+  if (product.rating) {
+    productDetails.appendChild(rating)
+  }
+  if (product.category) {
+    productDetails.appendChild(category)
+  }
+  if (product.product_type) {
+    productDetails.appendChild(product_type)
+  }
+
+  return productDetails;
+}
+
+function renderDetailsRow(title, value) {
+  const detailsRow = document.createElement('div');
+  detailsRow.className = "details-row";
+  const detailsTitle = document.createElement('div');
+  detailsTitle.textContent = title;
+  detailsRow.appendChild(detailsTitle);
+  detailsRow.className = "details-row"
+  const detailsBar = document.createElement('div');
+  detailsBar.className = "details-bar";
+  const detailsBarBg = document.createElement('div');
+  detailsBarBg.className = "details-bar-bg"
+  detailsBarBg.textContent = value;
+  detailsBar.appendChild(detailsBarBg);
+  detailsRow.appendChild(detailsBar);
+  return detailsRow;
+}
+
+
 
 function renderData() {
   listEl[0].innerHTML = "";
@@ -223,7 +271,6 @@ function renderBasedOnSort() {
 }
 
 async function getProductsBasedOnQuery() {
-
   activeProductList = await listProductsWithQuery(queryBuilder());
   renderData();
 }
