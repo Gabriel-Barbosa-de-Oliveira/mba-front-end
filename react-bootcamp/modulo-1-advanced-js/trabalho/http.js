@@ -11,8 +11,12 @@ function fetchJson(url, options) {
   })
 }
 
-const baseUrl = 'http://makeup-api.herokuapp.com/'
+// const baseUrl = 'http://makeup-api.herokuapp.com/' //online 
+// const path = 'api/v1/products.json //online'
+const baseUrl = 'http://localhost:3000/' //local 
+const path = "products"
+
 
 function listProducts() {
-  return fetchJson(`${baseUrl}api/v1/products.json`)
+  return fetchJson(`${baseUrl}${path}`)
 }
