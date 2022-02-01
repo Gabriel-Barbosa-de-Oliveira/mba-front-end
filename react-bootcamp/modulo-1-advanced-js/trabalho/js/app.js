@@ -1,5 +1,7 @@
 let products = [];
-let selectedItem;
+let brands = [];
+let types = [];
+
 const listEl = document.getElementsByClassName('catalog');
 const inputName = document.getElementById('filter-name');
 const inputBrand = document.getElementById('filter-brand');
@@ -41,7 +43,6 @@ function loadDetails(product) {
 
 
 async function init() {
-  console.log(listEl)
   products = await listProducts();
   renderData();
 }
@@ -142,5 +143,26 @@ function renderData() {
   listEl.innerHTML = "";
   products.forEach((product) => {
     listEl[0].appendChild(renderProductItem(product));
+    pushOnlyUniqueStringValueToArray(product.brand, brands)
+    pushOnlyUniqueStringValueToArray(product.product_type, types)
   });
+
+  buildCustomOptions(brands, inputBrand)
+  buildCustomOptions(types, inputType)
+}
+
+function pushOnlyUniqueStringValueToArray(value, array) {
+  const index = array.findIndex(x => x === value)
+  if (index === -1) {
+    array.push(value);
+  }
+}
+
+function buildCustomOptions(array, input) {
+  for (const item of array) {
+    const option = document.createElement("option");
+    option.textContent = item;
+    option.value = item;
+    input.appendChild(option);
+  }
 }
