@@ -114,7 +114,7 @@ function createDivProductBrandsSpanComponent(product) {
 function createSpanPriceComponent(product) {
   const spanPrice = document.createElement('span');
   spanPrice.className = "product-brand background-price";
-  const price = parseInt(getConvertedPrice(product)).toString();
+  const price = parseFloat(getConvertedPrice(product)).toString();
   spanPrice.textContent = `${currencyFormatter(price)}`;
   return spanPrice;
 }
@@ -269,13 +269,14 @@ function renderBestAvailablesOrder() {
 }
 function renderMinorPricesOrder() {
   activeSorting = 'renderMinorPricesOrder';
-  activeProductList.sort((a, b) => a.price.localeCompare(b.price))
+  // activeProductList.sort((a, b) => a.price.localeCompare(b.price))
+  activeProductList.sort(function (a, b) { return parseFloat(a.price) - parseFloat(b.price) })
   renderData(activeProductList);
 }
 
 function renderBiggerPricesOrder() {
   activeSorting = 'renderBiggerPricesOrder';
-  activeProductList.sort((a, b) => b.price.localeCompare(a.price))
+  activeProductList.sort(function (a, b) { return parseFloat(b.price) - parseFloat(a.price) })
   renderData(activeProductList);
 
 }
