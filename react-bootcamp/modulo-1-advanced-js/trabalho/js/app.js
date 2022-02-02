@@ -6,6 +6,7 @@ let initialState = true;
 let queryBrand = "";
 let queryTypes = "";
 let queryName = "";
+let originalProductArray = [];
 
 const listEl = document.getElementsByClassName('catalog');
 const inputName = document.getElementById('filter-name');
@@ -58,6 +59,7 @@ function createContainerComponent(product) {
   container.setAttribute('data-brand', product.brand);
   container.setAttribute('data-type', product.product_type);
   container.setAttribute('tabindex', 508);
+  container.setAttribute('id', product.name)
   return container;
 }
 
@@ -166,9 +168,9 @@ function renderDetailsRow(title, value) {
 
 
 
-function renderData() {
+function renderData(array) {
   listEl[0].innerHTML = "";
-  activeProductList.forEach((product) => {
+  array.forEach((product) => {
     listEl[0].appendChild(renderProductItem(product));
     if (initialState) {
       pushOnlyUniqueStringValueToArray(product.brand, brands)
@@ -204,13 +206,15 @@ function buildCustomOptions(array, input) {
 }
 
 function renderBasedOnName() {
-  const value = inputName.value
-  if (value !== "") {
-    queryName = `name=${value}`
+  originalProductArray = cloneDeep(activeProductList)
+  const filteredArray = originalProductArray.filter(product => product.name.toLowerCase().includes(inputName.value.toLowerCase()))
+  console.log(filteredArray);
+  if (filteredArray.length !== 0 && inputName.value.length !== 0) {
+    activeProductList = filteredArray;
+    renderData(activeProductList);
   } else {
-    queryName = "";
+    getProductsBasedOnQuery();
   }
-  getProductsBasedOnQuery();
 }
 function renderBasedOnBrand() {
   const value = inputBrand.value
@@ -243,39 +247,37 @@ function renderBasedOnSort() {
 
   const methodCall = methods[inputSort.value.toString()];
   methodCall();
-
-  console.log("chamou sort")
 }
 
 function renderBestAvailablesOrder() {
   activeProductList.sort(function (a, b) { return b.rating - a.rating })
-  renderData();
+  renderData(activeProductList);
 }
 function renderMinorPricesOrder() {
   activeProductList.sort((a, b) => a.price.localeCompare(b.price))
-  renderData();
+  renderData(activeProductList);
 }
 
 function renderBiggerPricesOrder() {
   activeProductList.sort((a, b) => b.price.localeCompare(a.price))
-  renderData();
+  renderData(activeProductList);
 
 }
 function renderAlphabeticOrder() {
   activeProductList.sort((a, b) => a.name.localeCompare(b.name))
-  renderData();
+  renderData(activeProductList);
 }
 
 function renderInverseAlphabeticOrder() {
   activeProductList.sort((a, b) => b.name.localeCompare(a.name))
-  renderData();
+  renderData(activeProductList);
 }
 
 
 
 async function getProductsBasedOnQuery() {
   activeProductList = await listProductsWithQuery(queryBuilder());
-  renderData();
+  renderData(activeProductList);
 }
 
 function queryBuilder() {
