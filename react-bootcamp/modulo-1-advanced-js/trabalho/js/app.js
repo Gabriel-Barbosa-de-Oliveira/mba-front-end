@@ -7,6 +7,15 @@ let queryBrand = "";
 let queryTypes = "";
 let queryName = "";
 let originalProductArray = [];
+let activeSorting = "renderBestAvailablesOrder";
+const possibleSortingMethods = {
+  "renderBestAvailablesOrder": () => { renderBestAvailablesOrder() },
+  "renderMinorPricesOrder": () => { renderMinorPricesOrder() },
+  "renderBiggerPricesOrder": () => { renderBiggerPricesOrder() },
+  "renderAlphabeticOrder": () => { renderAlphabeticOrder() },
+  "renderInverseAlphabeticOrder": () => { renderInverseAlphabeticOrder() },
+}
+
 
 const listEl = document.getElementsByClassName('catalog');
 const inputName = document.getElementById('filter-name');
@@ -249,26 +258,35 @@ function renderBasedOnSort() {
   methodCall();
 }
 
+//declarar um object literals com os metodos de render com ordenação
+//criar uma variavel de controle de ordenação ativa
+//chamar a ordenação antes de renderizar em todos os renders
+
 function renderBestAvailablesOrder() {
+  activeSorting = 'renderBestAvailablesOrder';
   activeProductList.sort(function (a, b) { return b.rating - a.rating })
   renderData(activeProductList);
 }
 function renderMinorPricesOrder() {
+  activeSorting = 'renderMinorPricesOrder';
   activeProductList.sort((a, b) => a.price.localeCompare(b.price))
   renderData(activeProductList);
 }
 
 function renderBiggerPricesOrder() {
+  activeSorting = 'renderBiggerPricesOrder';
   activeProductList.sort((a, b) => b.price.localeCompare(a.price))
   renderData(activeProductList);
 
 }
 function renderAlphabeticOrder() {
+  activeSorting = 'renderAlphabeticOrder';
   activeProductList.sort((a, b) => a.name.localeCompare(b.name))
   renderData(activeProductList);
 }
 
 function renderInverseAlphabeticOrder() {
+  activeSorting = 'renderInverseAlphabeticOrder';
   activeProductList.sort((a, b) => b.name.localeCompare(a.name))
   renderData(activeProductList);
 }
@@ -277,7 +295,8 @@ function renderInverseAlphabeticOrder() {
 
 async function getProductsBasedOnQuery() {
   activeProductList = await listProductsWithQuery(queryBuilder());
-  renderData(activeProductList);
+  const callMethod = possibleSortingMethods[activeSorting];
+  callMethod();
 }
 
 function queryBuilder() {
