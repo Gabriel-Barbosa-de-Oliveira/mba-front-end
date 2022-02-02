@@ -16,7 +16,7 @@ const inputSort = document.getElementById('sort-type');
 async function init() {
   products = await listProducts();
   activeProductList = cloneDeep(products);
-  renderData();
+  renderBestAvailablesOrder();
   inputName.addEventListener("input", withDelay(renderBasedOnName, 500));
   inputBrand.addEventListener("change", renderBasedOnBrand);
   inputType.addEventListener("change", renderBasedOnType);
