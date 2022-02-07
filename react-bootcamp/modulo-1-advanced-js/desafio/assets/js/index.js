@@ -47,7 +47,9 @@ function mapRecovered(totalRecovered) {
 }
 
 function mapDate(date) {
-  const formattedDate = format(new Date(date), 'dd/MM/yyyy HH:mm')
+  const formattedDate = format(new Date(date), 'dd/MM/yyyy HH:mm', {
+    timeZone: 'America/Sao_Paulo',
+  })
   // data.textContent += ' ' + zonedTimeToUtc(formattedDate, 'America/Sao_Paulo');
   data.textContent += ' ' + formattedDate;
 }
