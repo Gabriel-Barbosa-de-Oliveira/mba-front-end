@@ -1,4 +1,5 @@
-import { format, add, getHours, parse } from "https://cdn.skypack.dev/date-fns@2.16.1";
+import { format } from "https://cdn.skypack.dev/date-fns";
+import { zonedTimeToUtc } from "https://cdn.skypack.dev/date-fns-tz";
 
 let confirmed = document.getElementById('confirmed');
 let death = document.getElementById('death');
@@ -46,7 +47,9 @@ function mapRecovered(totalRecovered) {
 }
 
 function mapDate(date) {
-  data.textContent += ' ' + format(new Date(date), 'dd/MM/yyyy');
+  const formattedDate = format(new Date(date), 'dd/MM/yyyy HH:mm')
+  // data.textContent += ' ' + zonedTimeToUtc(formattedDate, 'America/Sao_Paulo');
+  data.textContent += ' ' + formattedDate;
 }
 
 
