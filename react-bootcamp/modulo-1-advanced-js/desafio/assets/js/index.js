@@ -1,6 +1,9 @@
+import { format, add, getHours, parse } from "https://cdn.skypack.dev/date-fns@2.16.1";
+
 let confirmed = document.getElementById('confirmed');
 let death = document.getElementById('death');
 let recovered = document.getElementById('recovered');
+const data = document.getElementById('date');
 const pizza = document.getElementById('pizza').getContext('2d');
 const barras = document.getElementById('barras').getContext('2d');
 
@@ -17,10 +20,9 @@ async function init() {
   mapConfirmedCases(retrievedData.Global.TotalConfirmed);
   mapDeaths(retrievedData.Global.TotalDeaths);
   mapRecovered(retrievedData.Global.TotalRecovered);
+  mapDate(retrievedData.Date);
   mapPieChart();
   mapBarChart();
-  // _.orderBy(retrievedData.Countries, [TotalDeaths], ['desc']);
-  console.log(_.orderBy(retrievedData.Countries, ['TotalDeaths'], ['desc']));
 }
 
 function mapDataToRetrivedData(data) {
@@ -41,6 +43,10 @@ function mapDeaths(totalDeaths) {
 function mapRecovered(totalRecovered) {
   recovereds = totalRecovered;
   recovered.textContent = formatNumberWithDots(totalRecovered);
+}
+
+function mapDate(date) {
+  data.textContent += ' ' + format(new Date(date), 'dd/MM/yyyy');
 }
 
 
