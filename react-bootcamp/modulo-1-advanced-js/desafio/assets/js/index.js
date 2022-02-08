@@ -18,9 +18,9 @@ init();
 async function init() {
   const { data } = await getData('https://api.covid19api.com/summary');
   mapDataToRetrivedData(data);
-  mapConfirmedCases(retrievedData.Global.TotalConfirmed);
-  mapDeaths(retrievedData.Global.TotalDeaths);
-  mapRecovered(retrievedData.Global.TotalRecovered);
+  mapConfirmedCases(retrievedData.Global.TotalConfirmed, retrievedData.Global.NewConfirmed); // carregar grafico de pizza com os new em vez de total
+  mapDeaths(retrievedData.Global.TotalDeaths, retrievedData.Global.NewDeaths);
+  mapRecovered(retrievedData.Global.TotalRecovered, retrievedData.Global.NewReCovered);
   mapDate(retrievedData.Date);
   mapPieChart();
   mapBarChart();
@@ -31,18 +31,18 @@ function mapDataToRetrivedData(data) {
   console.log(retrievedData)
 }
 
-function mapConfirmedCases(totalConfirmed) {
-  confirmeds = totalConfirmed;
+function mapConfirmedCases(totalConfirmed, newconfirmed) {
+  confirmeds = newconfirmed;
   confirmed.textContent = formatNumberWithDots(totalConfirmed)
 }
 
-function mapDeaths(totalDeaths) {
-  deaths = totalDeaths;
+function mapDeaths(totalDeaths, newDeaths) {
+  deaths = newDeaths;
   death.textContent = formatNumberWithDots(totalDeaths);
 }
 
-function mapRecovered(totalRecovered) {
-  recovereds = totalRecovered;
+function mapRecovered(totalRecovered, newRecovered) {
+  recovereds = newRecovered;
   recovered.textContent = formatNumberWithDots(totalRecovered);
 }
 
@@ -75,7 +75,7 @@ function getPieChartData() {
 }
 
 function mapBarChart() {
-  const orderedDataArray = _.take(_.orderBy(retrievedData.Countries, ['TotalDeaths'], ['desc']), 10);
+  const orderedDataArray = _.take(_.orderBy(retrievedData.Countries, ['TotalDeaths', "Country"], ['desc', 'asc']), 10);
   const labels = _.map(orderedDataArray, 'Country');
   const data = _.map(orderedDataArray, 'TotalDeaths');
   const myChart = new Chart(barras, getChartConfig('bar', getBarChartData(labels, data), undefined))
