@@ -3,6 +3,7 @@ const dateStart = document.getElementById('date_start');
 const dateEnd = document.getElementById('date_end');
 const cmbData = document.getElementById('cmbData');
 const filtro = document.getElementById('filtro');
+const kpiconfirmed = document.getElementById('kpiconfirmed');
 
 let retrievedCountries = {};
 
@@ -16,10 +17,6 @@ async function init() {
 
 
 function addEventListeners() {
-  // contryOptions.addEventListener("change", mapNewCountryOption);
-  // dateStart.addEventListener("change", mapStartDateValue);
-  // dateEnd.addEventListener("change", mapEndDateValue);
-  // cmbData.addEventListener("change", mapCmbDataValue);
   filtro.addEventListener("click", submit);
 }
 
@@ -39,22 +36,6 @@ function buildCustomOptions(array, input) {
   }
 }
 
-// function mapNewCountryOption() {
-//   console.log(contryOptions.value)
-// }
-
-// function mapStartDateValue() {
-//   console.log(dateStart.value)
-// }
-
-// function mapEndDateValue() {
-//   console.log(dateEnd.value)
-// }
-
-// function mapCmbDataValue() {
-//   console.log(cmbData.value)
-// }
-
 function submit(evt) {
   evt.preventDefault();
   console.log("cmbData.value")
@@ -62,6 +43,10 @@ function submit(evt) {
 }
 
 async function getFilteredData() {
-  console.log(await getData(`https://api.covid19api.com/country/${contryOptions.value}/status/${cmbData.value}`));
+  const { data } = await getData(`https://api.covid19api.com/country/${contryOptions.value}/status/${cmbData.value}`);
+  console.log(data);
+  kpiconfirmed.textContent = formatNumberWithDots(_.last(data).Cases)
+
+
 }
 
