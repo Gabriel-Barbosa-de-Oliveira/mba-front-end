@@ -4,6 +4,8 @@ const dateEnd = document.getElementById('date_end');
 const cmbData = document.getElementById('cmbData');
 const filtro = document.getElementById('filtro');
 const kpiconfirmed = document.getElementById('kpiconfirmed');
+const kpideaths = document.getElementById('kpideaths');
+const kpirecovered = document.getElementById('kpirecovered');
 
 let retrievedCountries = {};
 
@@ -43,9 +45,27 @@ function submit(evt) {
 }
 
 async function getFilteredData() {
-  const { data } = await getData(`https://api.covid19api.com/country/${contryOptions.value}/status/${cmbData.value}`);
-  console.log(data);
-  kpiconfirmed.textContent = formatNumberWithDots(_.last(data).Cases)
+  const promises = [
+    getData(`https://api.covid19api.com/country/${contryOptions.value}/status/${cmbData.value}`),
+    getData(`https://api.covid19api.com/country/${contryOptions.value}/status/confirmed`),
+    getData(`https://api.covid19api.com/country/${contryOptions.value}/status/recovered`),
+    getData(`https://api.covid19api.com/country/${contryOptions.value}/status/deaths`)
+  ]
+
+  Promise.all(promises).then((list) => {
+    console.log('Result:');
+    console.log(list);
+    kpiconfirmed.textContent = formatNumberWithDots(_.last(list[1].data).Cases)
+    kpirecovered.textContent = formatNumberWithDots(_.last(list[2].data).Cases)
+    kpideaths.textContent = formatNumberWithDots(_.last(list[3].data).Cases)
+  })
+    .catch((error) => {
+      console.log('Error:');
+      console.log(error);
+    });
+
+  // const { data } = await getData(`https://api.covid19api.com/country/${contryOptions.value}/status/${cmbData.value}`);
+  // console.log(data);
 
 
 }
