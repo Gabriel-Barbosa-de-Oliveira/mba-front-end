@@ -18,9 +18,9 @@ init();
 async function init() {
   const { data } = await getData('https://api.covid19api.com/summary');
   mapDataToRetrivedData(data);
-  mapConfirmedCases(retrievedData.Global.TotalConfirmed, retrievedData.Global.NewConfirmed); // carregar grafico de pizza com os new em vez de total
-  mapDeaths(retrievedData.Global.TotalDeaths, retrievedData.Global.NewDeaths);
-  mapRecovered(retrievedData.Global.TotalRecovered, retrievedData.Global.NewReCovered);
+  mapConfirmedCases(retrievedData.Global.TotalConfirmed, retrievedData.Global.TotalConfirmed); // carregar grafico de pizza com os new em vez de total
+  mapDeaths(retrievedData.Global.TotalDeaths, retrievedData.Global.TotalDeaths);
+  mapRecovered(retrievedData.Global.TotalRecovered, retrievedData.Global.TotalRecovered);
   mapDate(retrievedData.Date);
   mapPieChart();
   mapBarChart();

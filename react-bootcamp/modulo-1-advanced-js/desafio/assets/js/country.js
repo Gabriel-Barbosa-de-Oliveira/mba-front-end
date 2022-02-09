@@ -35,8 +35,8 @@ function mapDataToRetrivedData(data) {
   retrievedCountries = _.orderBy(data, ['Country'], ['asc']);
   buildCustomOptions(retrievedCountries, contryOptions)
   contryOptions.value = 'brazil';
-  dateStart.value = '2021-04-01';
-  dateEnd.value = '2021-04-25';
+  dateStart.value = '2021-01-01';
+  dateEnd.value = '2021-02-28';
 
   console.log(retrievedCountries)
 }
