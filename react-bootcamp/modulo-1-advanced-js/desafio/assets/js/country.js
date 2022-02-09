@@ -23,6 +23,7 @@ async function init() {
   const { data } = await getData('https://api.covid19api.com/countries');
   mapDataToRetrivedData(data);
   addEventListeners()
+  submit()
 }
 
 
@@ -33,6 +34,10 @@ function addEventListeners() {
 function mapDataToRetrivedData(data) {
   retrievedCountries = _.orderBy(data, ['Country'], ['asc']);
   buildCustomOptions(retrievedCountries, contryOptions)
+  contryOptions.value = 'brazil';
+  dateStart.value = '2021-04-01';
+  dateEnd.value = '2021-04-25';
+
   console.log(retrievedCountries)
 }
 
@@ -47,7 +52,8 @@ function buildCustomOptions(array, input) {
 }
 
 function submit(evt) {
-  evt.preventDefault();
+  if (evt)
+    evt.preventDefault();
   getFilteredData();
 }
 
