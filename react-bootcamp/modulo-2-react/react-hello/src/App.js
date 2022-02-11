@@ -1,21 +1,23 @@
+import Header from "./components/Header";
+
 export default function App() {
   console.log('Teste no console do navegador')
 
+  const name = "Gabriel";
+  const age = 24;
+
   return (
-    <div>
-      <header>
-        <div className="bg-gray-100 mx-auto p-4">
-          <h1 className="text-center font-semibold text-xl">
-            Projeto base para o Módulo React I
-          </h1>
-        </div>
-      </header>
+    <>
+      <Header>
+        Componente Header - projeto react-hello
+      </Header>
+
 
       <main>
         <div className="container mx-auto p-4">
-          <h2>O conteúdo fica aqui.</h2>
+          <p>O seu nome é {name} e você possui {age} anos.</p>
         </div>
       </main>
-    </div>
+    </>
   )
 }
