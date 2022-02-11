@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DateInput from "./components/DateInput";
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -15,6 +15,12 @@ export default function App() {
 
   const [name, setName] = useState('Gabriel');
   const [birthDate, setBirthDate] = useState('1997-05-22');
+
+  useEffect(() => {
+    //Depois que renderiza o use effect é chamado 
+    //se chamar sem deps. fica executando cada vez que tem alteração na pagina
+    document.title = name
+  }, [name])
 
   //Clojure
 
