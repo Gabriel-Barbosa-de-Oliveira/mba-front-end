@@ -4,7 +4,6 @@ import Test from "./components/Test";
 
 export default function App() {
 
-  let name = "Gabriel Barbosa"
 
   return (
     <>
@@ -12,7 +11,8 @@ export default function App() {
         Componente Header - projeto react-hello
       </Header>
       <Main>
-        <input className="border" type='text' value={name} />
+        <label htmlFor="inputName">Digite seu nome: </label>
+        <input id="inputName" className="border" type='text' />
         <p>O seu nome é Gabriel e você possui 24 anos.</p>
       </Main>
     </>
