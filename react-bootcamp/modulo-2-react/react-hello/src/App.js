@@ -3,6 +3,7 @@ import CheckBoxInput from "./components/CheckBoxInput";
 import DateInput from "./components/DateInput";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import OnlineOffline from "./components/OnlineOffline";
 import Test from "./components/Test";
 import TextInput from "./components/TextInput";
 import Timer from "./components/Timer";
@@ -18,12 +19,41 @@ export default function App() {
   const [name, setName] = useState('Gabriel');
   const [birthDate, setBirthDate] = useState('1997-05-22');
   const [showTimer, setShowTimer] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
     //Depois que renderiza o use effect é chamado 
     //se chamar sem deps. fica executando cada vez que tem alteração na pagina
     document.title = name
   }, [name])
+
+  useEffect(() => {
+    //online
+    //offline
+    function toggleOnline() {
+      setIsOnline(true);
+    }
+    function toggleOffline() {
+      setIsOnline(false);
+    }
+    window.addEventListener('online', () => {
+      setIsOnline(toggleOnline());
+    })
+
+    window.addEventListener('offline', () => {
+      setIsOnline(toggleOffline());
+    })
+
+    return () => {
+      window.removeEventListener('online', () => {
+        setIsOnline(toggleOnline());
+      })
+
+      window.removeEventListener('offline', () => {
+        setIsOnline(toggleOffline());
+      })
+    }
+  }, [])
 
   //Clojure
 
@@ -47,6 +77,7 @@ export default function App() {
         Componente Header - projeto react-hello
       </Header>
       <Main>
+        <OnlineOffline isOnline={isOnline} />
         {
           showTimer && (<div className="text-right m-4">
             <Timer />
