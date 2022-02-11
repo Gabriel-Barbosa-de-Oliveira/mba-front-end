@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <>
-      <Header>
+      <Header size="large">
         Componente Header - projeto react-hello
       </Header>
 
