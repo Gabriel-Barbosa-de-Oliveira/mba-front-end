@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Test from "./components/Test";
 import TextInput from "./components/TextInput";
+import { getAgeFrom } from "./helpers/dateHelpers";
 
 export default function App() {
 
@@ -34,7 +35,7 @@ export default function App() {
       <Main>
         <TextInput labelDescription="Digite o seu nome:" inputValue={name} onInputChange={handleNameChange} />
         <DateInput labelDescription="Digite a sua data de nascimento:" inputValue={birthDate} onInputChange={handleBirthDateChange} />
-        <p>O seu nome é {name}, com {name.length} caracteres, e você possui {birthDate} anos.</p>
+        <p>O seu nome é {name}, com {name.length} caracteres, e você possui {getAgeFrom(birthDate)} anos.</p>
       </Main>
     </>
   )
