@@ -1,4 +1,4 @@
-export const allCountries =[
+export const allCountries = [
   {
     "id": "04b20229-3f4c-48ec-9c39-3476ef5d284e",
     "name": "Afghanistan",
@@ -2249,4 +2249,6 @@ export const allCountries =[
     "area": 390757,
     "flag": "https://restcountries.eu/data/zwe.svg"
   }
-]
+].map(country => {
+  return ({ ...country, nameLowerCase: country.name.toLocaleLowerCase() })
+})
