@@ -23,6 +23,7 @@ export default function InvestimentsPage() {
             );
 
             console.log(allReportsBasedOnId, "reports");
+            let totalValue = 0;
             return (
               <div key={investment.id} className="m-5">
                 <h1 className="text-center font-semibold text-lg">
@@ -30,10 +31,13 @@ export default function InvestimentsPage() {
                 </h1>
                 <h2 className="text-center">
                   <span className="font-semibold">Rendimento Total:</span>{" "}
-                  <span className="text-green-600">10000</span>
+                  <span className="text-green-600">{totalValue}</span>
                 </h2>
 
-                {allReportsBasedOnId.map((report) => {
+                {allReportsBasedOnId.map((report, index) => {
+                  //verificar a porcentagem de aumento do valor ou não
+                  //enviar classe certa para componente
+                  //ir calculando o valor do rendimento total e retornar quando for o ultimo loop
                   return (
                     <div key={report.id}>
                       <Investment>{report}</Investment>
