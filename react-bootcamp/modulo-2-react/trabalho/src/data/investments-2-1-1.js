@@ -1,4 +1,4 @@
-{
+export const allInvestments = {
   "investments": [
     {
       "id": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
