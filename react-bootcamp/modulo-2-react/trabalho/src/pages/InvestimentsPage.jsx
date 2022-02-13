@@ -36,7 +36,7 @@ export default function InvestimentsPage() {
                 {allReportsBasedOnId.map((report) => {
                   return (
                     <div key={report.id}>
-                      <Investment>Teste</Investment>
+                      <Investment>{report}</Investment>
                     </div>
                   );
                 })}
