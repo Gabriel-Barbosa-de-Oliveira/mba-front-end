@@ -1,7 +1,10 @@
 import React from "react";
 import Item from "./Item";
 
-export default function Country({ children: country = null }) {
+export default function Country({
+  children: country = null,
+  onCountryClick = null,
+}) {
   if (!country) {
     return <div>Impossível renderizar o páis</div>;
   }
@@ -9,8 +12,17 @@ export default function Country({ children: country = null }) {
   const { flag, name, capital, region, population, area } = country;
   const demographicDensity = population / area;
 
+  function handleCountryClick() {
+    if (onCountryClick) {
+      onCountryClick(country.id);
+    }
+  }
+
   return (
-    <div className="border p-2 m-2 flex flex-row items-center space-x-2">
+    <div
+      className="border p-2 m-2 flex flex-row items-center space-x-2"
+      onClick={handleCountryClick}
+    >
       <img className="w-48" src={flag} alt={name} />
       <ul>
         <li>
