@@ -37,8 +37,6 @@ export default function ReactCountriesPage() {
         )
       : allCountries;
 
-  console.log(visitedCountries);
-
   return (
     <div>
       <Header>react-countries</Header>
@@ -50,7 +48,10 @@ export default function ReactCountriesPage() {
           id="inputCountryFilter"
           onInputChange={handleCountryFilterChange}
         />
-        <Countries onCountryClick={toggleVisitedCountry}>
+        <Countries
+          visitedCountries={visitedCountries}
+          onCountryClick={toggleVisitedCountry}
+        >
           {filteredCountries}
         </Countries>
       </Main>

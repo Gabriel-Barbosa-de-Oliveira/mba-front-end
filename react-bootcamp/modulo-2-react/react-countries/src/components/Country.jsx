@@ -4,6 +4,7 @@ import Item from "./Item";
 export default function Country({
   children: country = null,
   onCountryClick = null,
+  isVisited = false,
 }) {
   if (!country) {
     return <div>Impossível renderizar o páis</div>;
@@ -11,6 +12,8 @@ export default function Country({
 
   const { flag, name, capital, region, population, area } = country;
   const demographicDensity = population / area;
+
+  const isVisitedClassName = isVisited ? "bg-green-100" : "";
 
   function handleCountryClick() {
     if (onCountryClick) {
@@ -20,7 +23,7 @@ export default function Country({
 
   return (
     <div
-      className="border p-2 m-2 flex flex-row items-center space-x-2"
+      className={`border p-2 m-2 flex flex-row items-center space-x-2 cursor-pointer ${isVisitedClassName}`}
       onClick={handleCountryClick}
     >
       <img className="w-48" src={flag} alt={name} />
