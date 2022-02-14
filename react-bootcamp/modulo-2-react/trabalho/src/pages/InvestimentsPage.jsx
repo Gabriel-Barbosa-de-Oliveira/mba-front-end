@@ -38,9 +38,23 @@ export default function InvestimentsPage() {
                   //verificar a porcentagem de aumento do valor ou não
                   //enviar classe certa para componente
                   //ir calculando o valor do rendimento total e retornar quando for o ultimo loop
+
+                  let porcent = 0;
+                  if (index !== 0) {
+                    const initialValue = _.round(
+                      allReportsBasedOnId[index - 1].value,
+                      2
+                    );
+                    const finalValue = _.round(report.value, 2);
+                    porcent =
+                      ((finalValue - initialValue) / initialValue) * 100;
+                  }
+
                   return (
                     <div key={report.id}>
-                      <Investment>{report}</Investment>
+                      <Investment porcent={_.round(porcent)}>
+                        {report}
+                      </Investment>
                     </div>
                   );
                 })}
