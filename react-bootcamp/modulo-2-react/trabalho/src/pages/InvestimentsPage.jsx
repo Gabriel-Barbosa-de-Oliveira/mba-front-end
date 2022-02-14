@@ -9,6 +9,9 @@ export default function InvestimentsPage() {
   const { investments, reports } = allInvestments;
   console.log(investments);
   console.log(reports);
+  function calcPercentage(initialValue, finalValue) {
+    return ((finalValue - initialValue) / initialValue) * 100;
+  }
   return (
     <div>
       <Header>react-investments v1.0.1</Header>
@@ -23,7 +26,10 @@ export default function InvestimentsPage() {
             );
 
             console.log(allReportsBasedOnId, "reports");
-            let totalValue = 0;
+            let totalValue = _.round(
+              allReportsBasedOnId[11].value - allReportsBasedOnId[0].value,
+              2
+            );
             return (
               <div key={investment.id} className="m-5">
                 <h1 className="text-center font-semibold text-lg">
@@ -31,7 +37,16 @@ export default function InvestimentsPage() {
                 </h1>
                 <h2 className="text-center">
                   <span className="font-semibold">Rendimento Total:</span>{" "}
-                  <span className="text-green-600">{totalValue}</span>
+                  <span className="text-green-600">
+                    R$ {totalValue}{" "}
+                    {`(${_.round(
+                      calcPercentage(
+                        allReportsBasedOnId[0].value,
+                        allReportsBasedOnId[11].value
+                      ),
+                      2
+                    )} %)`}
+                  </span>
                 </h2>
 
                 {allReportsBasedOnId.map((report, index) => {
@@ -46,8 +61,7 @@ export default function InvestimentsPage() {
                       2
                     );
                     const finalValue = _.round(report.value, 2);
-                    porcent =
-                      ((finalValue - initialValue) / initialValue) * 100;
+                    porcent = calcPercentage(initialValue, finalValue);
                   }
 
                   return (
