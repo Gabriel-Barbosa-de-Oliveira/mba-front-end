@@ -1,4 +1,4 @@
-[
+export const flashcards = [
   {
     "title": "JSX",
     "description": "JavaScript and XML. Linguagem de marcação que pode ser utilizada para a criação de componentes React de forma mais declarativa. É bem semelhante ao HTML."
