@@ -5,7 +5,7 @@ export default function FlashCard({
   description = "Descrição do card, que pode conter mais palavras que o título",
 }) {
   const [showTitle, setShowTitle] = useState(true);
-  const fontSizeClassName = showTitle ? "text-xl" : "text-md";
+  const fontSizeClassName = showTitle ? "text-xl" : "text-sm";
 
   function handleCardClick() {
     setShowTitle((currentShowTitle) => !currentShowTitle);
@@ -13,7 +13,7 @@ export default function FlashCard({
 
   return (
     <div
-      className={`shadow-lg p-4 w-64 h-32 cursor-pointer
+      className={`shadow-lg m-2 p-4 w-80 h-40 cursor-pointer
                   flex flex-row items-center justify-center 
                   font-semibold ${fontSizeClassName}`}
       style={{ fontFamily: "monospace" }}
