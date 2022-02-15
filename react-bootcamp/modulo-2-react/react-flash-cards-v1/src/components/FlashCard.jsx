@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function FlashCard({
   title = "Título do card",
   description = "Descrição do card, que pode conter mais palavras que o título",
+  showFlashCardTitle = true,
 }) {
-  const [showTitle, setShowTitle] = useState(true);
+  const [showTitle, setShowTitle] = useState(showFlashCardTitle);
   const fontSizeClassName = showTitle ? "text-xl" : "text-sm";
+
+  useEffect(() => {
+    setShowTitle(showFlashCardTitle);
+  }, [showFlashCardTitle]);
 
   function handleCardClick() {
     setShowTitle((currentShowTitle) => !currentShowTitle);
