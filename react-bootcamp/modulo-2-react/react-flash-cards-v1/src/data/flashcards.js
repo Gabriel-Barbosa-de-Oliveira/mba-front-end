@@ -1,4 +1,6 @@
-export const flashcards = [
+import { getNewId } from "../services/idService";
+
+export const allFlashCards = [
   {
     "title": "JSX",
     "description": "JavaScript and XML. Linguagem de marcação que pode ser utilizada para a criação de componentes React de forma mais declarativa. É bem semelhante ao HTML."
@@ -39,4 +41,6 @@ export const flashcards = [
     "title": "Virtual DOM",
     "description": "Estrutura utilizada pelo React para manipulação do DOM em memória. Permite a atualização do DOM real somente onde necessário, o que pode garantir uma melhor performance da aplicação."
   }
-]
+].map(item => {
+  return { ...item, id: getNewId() };
+}).sort((a, b) => a.title.localeCompare(b.title))
