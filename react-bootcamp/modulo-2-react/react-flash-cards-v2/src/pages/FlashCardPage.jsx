@@ -9,6 +9,8 @@ import Main from "../components/Main";
 import RadioButton from "../components/RadioButton";
 import { helperShuffleArray } from "../helpers/arrayHelpers";
 import { apiGetAllFlashcards } from "../services/apiService";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 export default function FlashCardPage() {
   // Back End
   const [allCards, setAllCards] = useState([]);
@@ -88,41 +90,57 @@ export default function FlashCardPage() {
   if (!loading) {
     mainJsx = (
       <>
-        <div className="text-center mb-4">
-          <Button onButtonClick={handleShuffle}>Embaralhar Cards</Button>
-        </div>
-        <div className="flex flex-row items-center justify-center space-x-4">
-          <RadioButton
-            id="radioButtonShowTitle"
-            name="showInfo"
-            buttonChecked={radioButtonShowTitle}
-            onButtonClick={handleRadioShowTitleClick}
-          >
-            Mostrar Título
-          </RadioButton>
-          <RadioButton
-            id="radioButtonShowDescription"
-            name="showInfo"
-            buttonChecked={!radioButtonShowTitle}
-            onButtonClick={handleRadioShowDescriptionClick}
-          >
-            Mostrar Descrição
-          </RadioButton>
-        </div>
-        <FlashCards>
-          {studyCards.map(({ id, title, description, showTitle }) => {
-            return (
-              <FlashCard
-                key={id}
-                id={id}
-                title={title}
-                description={description}
-                showFlashCardTitle={showTitle}
-                onToggleFlashCard={handleToggleFlashCard}
-              />
-            );
-          })}
-        </FlashCards>
+        <Tabs>
+          <TabList>
+            <Tab>Listagem</Tab>
+            <Tab>Cadastro</Tab>
+            <Tab>Estudo</Tab>
+          </TabList>
+
+          <TabPanel>
+            <h2>Listagem</h2>
+          </TabPanel>
+          <TabPanel>
+            <h2>Cadastro</h2>
+          </TabPanel>
+          <TabPanel>
+            <div className="text-center mb-4">
+              <Button onButtonClick={handleShuffle}>Embaralhar Cards</Button>
+            </div>
+            <div className="flex flex-row items-center justify-center space-x-4">
+              <RadioButton
+                id="radioButtonShowTitle"
+                name="showInfo"
+                buttonChecked={radioButtonShowTitle}
+                onButtonClick={handleRadioShowTitleClick}
+              >
+                Mostrar Título
+              </RadioButton>
+              <RadioButton
+                id="radioButtonShowDescription"
+                name="showInfo"
+                buttonChecked={!radioButtonShowTitle}
+                onButtonClick={handleRadioShowDescriptionClick}
+              >
+                Mostrar Descrição
+              </RadioButton>
+            </div>
+            <FlashCards>
+              {studyCards.map(({ id, title, description, showTitle }) => {
+                return (
+                  <FlashCard
+                    key={id}
+                    id={id}
+                    title={title}
+                    description={description}
+                    showFlashCardTitle={showTitle}
+                    onToggleFlashCard={handleToggleFlashCard}
+                  />
+                );
+              })}
+            </FlashCards>
+          </TabPanel>
+        </Tabs>
       </>
     );
   }
