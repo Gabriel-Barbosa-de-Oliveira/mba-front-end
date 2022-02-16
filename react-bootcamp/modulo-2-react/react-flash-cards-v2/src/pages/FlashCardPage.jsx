@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import FlashCard from "../components/FlashCard";
 import FlashCards from "../components/FlashCards";
 import Header from "../components/Header";
+import Loading from "../components/Loading";
 import Main from "../components/Main";
 import RadioButton from "../components/RadioButton";
 import { helperShuffleArray } from "../helpers/arrayHelpers";
@@ -26,7 +27,9 @@ export default function FlashCardPage() {
     async function getAllCards() {
       const backEndAllCards = await apiGetAllFlashcards();
       setAllCards(backEndAllCards);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
 
     getAllCards();
@@ -66,10 +69,15 @@ export default function FlashCardPage() {
     setStudyCards(updatedCards);
   }
 
-  return (
-    <>
-      <Header>react-flash-cards-v2</Header>
-      <Main>
+  let mainJsx = (
+    <div className="flex justify-center my-4">
+      <Loading />
+    </div>
+  );
+
+  if (!loading) {
+    mainJsx = (
+      <>
         <div className="text-center mb-4">
           <Button onButtonClick={handleShuffle}>Embaralhar Cards</Button>
         </div>
@@ -105,7 +113,15 @@ export default function FlashCardPage() {
             );
           })}
         </FlashCards>
-      </Main>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Header>react-flash-cards-v2</Header>
+
+      <Main>{mainJsx}</Main>
     </>
   );
 }
