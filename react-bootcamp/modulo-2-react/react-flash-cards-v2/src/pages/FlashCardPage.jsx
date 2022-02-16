@@ -16,9 +16,16 @@ export default function FlashCardPage() {
   const [radioButtonShowTitle, setRadioButtonShowTitle] = useState(true);
 
   useEffect(() => {
-    apiGetAllFlashcards().then((allFlashCards) => {
-      setAllCards(allFlashCards);
-    });
+    // apiGetAllFlashcards().then((allFlashCards) => {
+    //   setAllCards(allFlashCards);
+    // });
+
+    async function getAllCards() {
+      const backEndAllCards = await apiGetAllFlashcards();
+      setAllCards(backEndAllCards);
+    }
+
+    getAllCards();
   }, []);
 
   function handleShuffle() {
