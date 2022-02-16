@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
+import Error from "../components/Error";
 import FlashCard from "../components/FlashCard";
 import FlashCards from "../components/FlashCards";
 import Header from "../components/Header";
@@ -16,6 +17,7 @@ export default function FlashCardPage() {
   const [studyCards, setStudyCards] = useState([]);
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const [radioButtonShowTitle, setRadioButtonShowTitle] = useState(true);
 
@@ -25,11 +27,15 @@ export default function FlashCardPage() {
     // });
 
     async function getAllCards() {
-      const backEndAllCards = await apiGetAllFlashcards();
-      setAllCards(backEndAllCards);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
+      try {
+        const backEndAllCards = await apiGetAllFlashcards();
+        setAllCards(backEndAllCards);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      } catch (error) {
+        setError(error.message);
+      }
     }
 
     getAllCards();
@@ -74,6 +80,10 @@ export default function FlashCardPage() {
       <Loading />
     </div>
   );
+
+  if (error) {
+    mainJsx = <Error />;
+  }
 
   if (!loading) {
     mainJsx = (
