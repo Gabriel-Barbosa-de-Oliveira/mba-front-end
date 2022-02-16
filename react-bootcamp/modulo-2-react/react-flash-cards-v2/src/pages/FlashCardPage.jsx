@@ -13,6 +13,9 @@ export default function FlashCardPage() {
 
   // Exclusivo para "Estudo"
   const [studyCards, setStudyCards] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+
   const [radioButtonShowTitle, setRadioButtonShowTitle] = useState(true);
 
   useEffect(() => {
@@ -23,6 +26,7 @@ export default function FlashCardPage() {
     async function getAllCards() {
       const backEndAllCards = await apiGetAllFlashcards();
       setAllCards(backEndAllCards);
+      setLoading(false);
     }
 
     getAllCards();
