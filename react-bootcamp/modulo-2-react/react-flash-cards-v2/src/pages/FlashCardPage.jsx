@@ -11,6 +11,7 @@ import { helperShuffleArray } from "../helpers/arrayHelpers";
 import { apiGetAllFlashcards } from "../services/apiService";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import FlashCardItem from "../components/FlashCardItem";
 export default function FlashCardPage() {
   // Back End
   const [allCards, setAllCards] = useState([]);
@@ -77,6 +78,10 @@ export default function FlashCardPage() {
     setStudyCards(updatedCards);
   }
 
+  function handleDeleteFlashCard(cardId) {
+    console.log(cardId);
+  }
+
   let mainJsx = (
     <div className="flex justify-center my-4">
       <Loading />
@@ -98,7 +103,16 @@ export default function FlashCardPage() {
           </TabList>
 
           <TabPanel>
-            <h2>Listagem</h2>
+            {allCards.map((flashCard) => {
+              return (
+                <FlashCardItem
+                  key={flashCard.id}
+                  onDelete={handleDeleteFlashCard}
+                >
+                  {flashCard}
+                </FlashCardItem>
+              );
+            })}
           </TabPanel>
           <TabPanel>
             <h2>Cadastro</h2>
