@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Error from "./Error";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
-export default function FlashCardForm({ createMode = true, onPersist = null }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+export default function FlashCardForm({
+  createMode = true,
+  onPersist = null,
+  children: flashcard = null,
+}) {
+  const [title, setTitle] = useState(flashcard?.title);
+  const [description, setDescription] = useState(flashcard?.description);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (createMode) {
+      clearFields();
+    }
+  }, [createMode]);
 
   function handleTitleChange(newTitle) {
     setTitle(newTitle);

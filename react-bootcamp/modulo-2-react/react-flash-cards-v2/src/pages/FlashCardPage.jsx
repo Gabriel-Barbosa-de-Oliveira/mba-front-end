@@ -106,7 +106,14 @@ export default function FlashCardPage() {
     if (createMode) {
       setAllCards([...allCards, { id: getNewId(), title, description }]);
     } else {
-      console.log("Edição");
+      setAllCards(
+        allCards.map((card) => {
+          if (card.id === selectedFlashCard.id) {
+            return { ...card, title, description };
+          }
+          return card;
+        })
+      );
     }
   }
 
@@ -149,7 +156,9 @@ export default function FlashCardPage() {
                 Novo Flash Card
               </Button>
             </div>
-            <FlashCardForm createMode={createMode} onPersist={handlePersist} />
+            <FlashCardForm createMode={createMode} onPersist={handlePersist}>
+              {selectedFlashCard}
+            </FlashCardForm>
           </TabPanel>
           <TabPanel>
             <div className="text-center mb-4">
