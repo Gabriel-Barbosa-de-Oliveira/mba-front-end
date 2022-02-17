@@ -8,7 +8,10 @@ import Loading from "../components/Loading";
 import Main from "../components/Main";
 import RadioButton from "../components/RadioButton";
 import { helperShuffleArray } from "../helpers/arrayHelpers";
-import { apiGetAllFlashcards } from "../services/apiService";
+import {
+  apiDeleteFlashcard,
+  apiGetAllFlashcards,
+} from "../services/apiService";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import FlashCardItem from "../components/FlashCardItem";
@@ -84,6 +87,10 @@ export default function FlashCardPage() {
   }
 
   function handleDeleteFlashCard(cardId) {
+    //Back End
+    apiDeleteFlashcard(cardId);
+
+    //Front End
     setAllCards(allCards.filter((card) => card.id !== cardId));
   }
 

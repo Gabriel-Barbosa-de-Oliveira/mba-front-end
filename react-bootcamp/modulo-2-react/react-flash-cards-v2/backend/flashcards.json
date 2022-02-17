@@ -1,11 +1,6 @@
 {
   "flashcards": [
     {
-      "id": "93973465-d403-4c0f-b8d2-7eb2be95f16a",
-      "title": "Componente React",
-      "description": "Representa código reutilizável pelo React. Em regra, deve começar com letra maiúscula. Pode ser customizável através de props"
-    },
-    {
       "id": "575a9435-0358-438e-9976-301515dff015",
       "title": "Efeitos colaterais",
       "description": "Também conhecido como 'side effects'. Representa tudo o que o React não controla diretamente. Bons exemplos são a manipulação manual do DOM e requisições HTTP."
