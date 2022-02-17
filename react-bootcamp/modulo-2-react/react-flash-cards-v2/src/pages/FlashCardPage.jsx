@@ -86,10 +86,10 @@ export default function FlashCardPage() {
     setStudyCards(updatedCards);
   }
 
-  function handleDeleteFlashCard(cardId) {
+  async function handleDeleteFlashCard(cardId) {
     try {
       //Back End
-      apiDeleteFlashcard(cardId);
+      await apiDeleteFlashcard(cardId);
 
       //Front End
       setAllCards(allCards.filter((card) => card.id !== cardId));
@@ -141,7 +141,7 @@ export default function FlashCardPage() {
     mainJsx = <Error />;
   }
 
-  if (!loading) {
+  if (!loading && !error) {
     mainJsx = (
       <>
         <Tabs selectedIndex={selectedTab} onSelect={handleTabSelect}>
