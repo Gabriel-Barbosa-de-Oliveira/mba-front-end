@@ -79,7 +79,7 @@ export default function FlashCardPage() {
   }
 
   function handleDeleteFlashCard(cardId) {
-    console.log(cardId);
+    setAllCards(allCards.filter((card) => card.id !== cardId));
   }
 
   let mainJsx = (
