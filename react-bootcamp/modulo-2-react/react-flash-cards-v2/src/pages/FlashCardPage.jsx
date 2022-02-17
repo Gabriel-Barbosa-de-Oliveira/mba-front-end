@@ -12,6 +12,7 @@ import {
   apiCreateFlashcard,
   apiDeleteFlashcard,
   apiGetAllFlashcards,
+  apiUpdateFlashcard,
 } from "../services/apiService";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -127,17 +128,26 @@ export default function FlashCardPage() {
         setError(error.message);
       }
     } else {
-      setAllCards(
-        allCards.map((card) => {
-          if (card.id === selectedFlashCard.id) {
-            return { ...card, title, description };
-          }
-          return card;
-        })
-      );
+      try {
+        //Back end
+        await apiUpdateFlashcard(selectedFlashCard.id, title, description);
 
-      setSelectedFlashCard(null);
-      setCreateMode(true);
+        //Front End
+        setAllCards(
+          allCards.map((card) => {
+            if (card.id === selectedFlashCard.id) {
+              return { ...card, title, description };
+            }
+            return card;
+          })
+        );
+
+        setSelectedFlashCard(null);
+        setCreateMode(true);
+        setError("");
+      } catch (error) {
+        setError(error.message);
+      }
     }
   }
 

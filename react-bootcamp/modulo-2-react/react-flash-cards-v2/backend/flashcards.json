@@ -1,9 +1,9 @@
 {
   "flashcards": [
     {
-      "id": "575a9435-0358-438e-9976-301515dff015",
-      "title": "Efeitos colaterais",
-      "description": "Também conhecido como 'side effects'. Representa tudo o que o React não controla diretamente. Bons exemplos são a manipulação manual do DOM e requisições HTTP."
+      "title": "Efeitos colaterais2",
+      "description": "Também conhecido como 'side effects'. Representa tudo o que o React não controla diretamente. Bons exemplos são a manipulação manual do DOM e requisições HTTP.2",
+      "id": "575a9435-0358-438e-9976-301515dff015"
     },
     {
       "id": "770cbeee-249f-45bf-9d2b-b2e01df0f609",
