@@ -87,11 +87,15 @@ export default function FlashCardPage() {
   }
 
   function handleDeleteFlashCard(cardId) {
-    //Back End
-    apiDeleteFlashcard(cardId);
+    try {
+      //Back End
+      apiDeleteFlashcard(cardId);
 
-    //Front End
-    setAllCards(allCards.filter((card) => card.id !== cardId));
+      //Front End
+      setAllCards(allCards.filter((card) => card.id !== cardId));
+    } catch (error) {
+      setError(error.message);
+    }
   }
 
   function handleEditFlashCard(card) {
