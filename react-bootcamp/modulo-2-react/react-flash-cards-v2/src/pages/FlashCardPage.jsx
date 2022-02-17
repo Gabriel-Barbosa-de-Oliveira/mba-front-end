@@ -114,6 +114,9 @@ export default function FlashCardPage() {
           return card;
         })
       );
+
+      setSelectedFlashCard(null);
+      setCreateMode(true);
     }
   }
 
