@@ -44,6 +44,11 @@
       "id": "4dc19cdf-113d-4ad3-a2d8-58c68153bec6",
       "title": "Virtual DOM",
       "description": "Estrutura utilizada pelo React para manipulação do DOM em memória. Permite a atualização do DOM real somente onde necessário, o que pode garantir uma melhor performance da aplicação."
+    },
+    {
+      "id": "cfc4f3af-16a9-4462-b5b4-aa8c9d31cff4",
+      "title": "teste",
+      "description": "teste"
     }
   ]
 }

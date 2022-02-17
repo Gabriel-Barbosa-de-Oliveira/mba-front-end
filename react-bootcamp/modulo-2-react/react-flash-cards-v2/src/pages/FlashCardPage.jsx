@@ -9,6 +9,7 @@ import Main from "../components/Main";
 import RadioButton from "../components/RadioButton";
 import { helperShuffleArray } from "../helpers/arrayHelpers";
 import {
+  apiCreateFlashcard,
   apiDeleteFlashcard,
   apiGetAllFlashcards,
 } from "../services/apiService";
@@ -93,6 +94,7 @@ export default function FlashCardPage() {
 
       //Front End
       setAllCards(allCards.filter((card) => card.id !== cardId));
+      setError("");
     } catch (error) {
       setError(error.message);
     }
@@ -113,9 +115,17 @@ export default function FlashCardPage() {
     setSelectedTab(tabIndex);
   }
 
-  function handlePersist(title, description) {
+  async function handlePersist(title, description) {
     if (createMode) {
-      setAllCards([...allCards, { id: getNewId(), title, description }]);
+      try {
+        //Back End
+        const handleNewFlashCard = await apiCreateFlashcard(title, description);
+
+        //Front End
+        setAllCards([...allCards, handleNewFlashCard]);
+      } catch (error) {
+        setError(error.message);
+      }
     } else {
       setAllCards(
         allCards.map((card) => {
