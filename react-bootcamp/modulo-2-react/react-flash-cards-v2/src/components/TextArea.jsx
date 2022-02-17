@@ -1,18 +1,22 @@
 import { getNewId } from "../services/idService";
 
-export default function TextInput({
+export default function TextArea({
   labelDescription = "Descrição do label:",
   inputValue = "Valor padrão do input",
-  onInputChange = null,
+  onTextAreaChange = null,
   id = getNewId(),
   autoFocus = false,
+  maxLength = 230,
+  rows = 4,
 }) {
-  function handleInputChange({ currentTarget }) {
-    if (onInputChange) {
+  function handleTextAreaChange({ currentTarget }) {
+    if (onTextAreaChange) {
       const newValue = currentTarget.value;
-      onInputChange(newValue);
+      onTextAreaChange(newValue);
     }
   }
+
+  const currentCharacterCount = inputValue.length;
 
   return (
     <div className="flex flex-col my-4">
@@ -20,14 +24,21 @@ export default function TextInput({
         {labelDescription}
       </label>
 
-      <input
+      <textarea
         autoFocus={autoFocus}
         id={id}
         className="border p-1"
         type="text"
         value={inputValue}
-        onChange={handleInputChange}
+        onChange={handleTextAreaChange}
+        maxLength={maxLength}
+        rows={rows}
       />
+      <div className="text-right mr-1">
+        <span>
+          {currentCharacterCount} / {maxLength}
+        </span>
+      </div>
     </div>
   );
 }

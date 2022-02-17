@@ -3,6 +3,8 @@ import React from "react";
 export default function Button({
   children: description = "Descrição do Botão",
   onButtonClick = null,
+  colorClass = "bg-gray-200",
+  type = "button",
 }) {
   function handleButtonClick() {
     if (onButtonClick) {
@@ -11,8 +13,9 @@ export default function Button({
   }
   return (
     <button
-      className="bg-gray-200 p-2 m-1 rounded-md"
+      className={`p-2 m-1 rounded-md ${colorClass}`}
       onClick={handleButtonClick}
+      type={type}
     >
       {description}
     </button>

@@ -12,6 +12,8 @@ import { apiGetAllFlashcards } from "../services/apiService";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import FlashCardItem from "../components/FlashCardItem";
+import FlashCardForm from "../components/FlashCardForm";
+import { getNewId } from "../services/idService";
 export default function FlashCardPage() {
   // Back End
   const [allCards, setAllCards] = useState([]);
@@ -21,6 +23,9 @@ export default function FlashCardPage() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [createMode, setCreateMode] = useState(true);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedFlashCard, setSelectedFlashCard] = useState(null);
 
   const [radioButtonShowTitle, setRadioButtonShowTitle] = useState(true);
 
@@ -82,6 +87,29 @@ export default function FlashCardPage() {
     setAllCards(allCards.filter((card) => card.id !== cardId));
   }
 
+  function handleEditFlashCard(card) {
+    setCreateMode(false);
+    handleTabSelect(1);
+    setSelectedFlashCard(card);
+  }
+
+  function handleNewFlashCard() {
+    setCreateMode(true);
+    setSelectedFlashCard(null);
+  }
+
+  function handleTabSelect(tabIndex) {
+    setSelectedTab(tabIndex);
+  }
+
+  function handlePersist(title, description) {
+    if (createMode) {
+      setAllCards([...allCards, { id: getNewId(), title, description }]);
+    } else {
+      console.log("Edição");
+    }
+  }
+
   let mainJsx = (
     <div className="flex justify-center my-4">
       <Loading />
@@ -95,7 +123,7 @@ export default function FlashCardPage() {
   if (!loading) {
     mainJsx = (
       <>
-        <Tabs>
+        <Tabs selectedIndex={selectedTab} onSelect={handleTabSelect}>
           <TabList>
             <Tab>Listagem</Tab>
             <Tab>Cadastro</Tab>
@@ -108,6 +136,7 @@ export default function FlashCardPage() {
                 <FlashCardItem
                   key={flashCard.id}
                   onDelete={handleDeleteFlashCard}
+                  onEdit={handleEditFlashCard}
                 >
                   {flashCard}
                 </FlashCardItem>
@@ -115,7 +144,12 @@ export default function FlashCardPage() {
             })}
           </TabPanel>
           <TabPanel>
-            <h2>Cadastro</h2>
+            <div className="my-4">
+              <Button onButtonClick={handleNewFlashCard}>
+                Novo Flash Card
+              </Button>
+            </div>
+            <FlashCardForm createMode={createMode} onPersist={handlePersist} />
           </TabPanel>
           <TabPanel>
             <div className="text-center mb-4">
