@@ -238,7 +238,7 @@ export default function FlashCardPage() {
 
   return (
     <>
-      <Header>react-flash-cards-v2</Header>
+      <Header>react-flash-cards-v3</Header>
 
       <Main>{mainJsx}</Main>
     </>
