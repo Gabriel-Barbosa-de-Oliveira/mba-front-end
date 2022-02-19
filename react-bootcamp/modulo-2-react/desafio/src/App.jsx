@@ -1,5 +1,5 @@
-import ReactElections from "./pages/ReactElections";
+import ReactElectionsPage from "./pages/ReactElectionsPage";
 
 export default function App() {
-  return <ReactElections />;
+  return <ReactElectionsPage />;
 }
