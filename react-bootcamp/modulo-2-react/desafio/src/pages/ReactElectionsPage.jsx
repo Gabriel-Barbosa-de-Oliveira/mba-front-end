@@ -6,13 +6,14 @@ import Main from "../components/Main";
 import { getDataFromApi } from "../services/apiService";
 import SelectInput from "../components/SelectInput";
 import CityDetails from "../components/CityDetails";
+import ElectionsDetails from "../components/ElectionsDetails";
 
 export default function ReactElectionsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [allCities, setAllCities] = useState([]);
   const [allCandidates, setAllCandidates] = useState([]);
-  const [election, setElection] = useState([]);
+  const [elections, setElection] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
 
   useEffect(() => {
@@ -47,6 +48,15 @@ export default function ReactElectionsPage() {
     setSelectedCity(allCities[index]);
   }
 
+  function getTotalCandidates() {
+    const filteredCityElection = getElectionsByCity();
+    return filteredCityElection.length;
+  }
+
+  function getElectionsByCity() {
+    return elections.filter((election) => election.cityId === selectedCity.id);
+  }
+
   let mainJsx = (
     <div className="flex justify-center my-4">
       <Loading />
@@ -68,7 +78,16 @@ export default function ReactElectionsPage() {
         </section>
         <section className="border">
           <div>
-            <CityDetails selectedCity={selectedCity} />
+            <CityDetails
+              selectedCity={selectedCity}
+              candidates={getTotalCandidates()}
+            />
+          </div>
+          <div>
+            <ElectionsDetails
+              allCandidates={allCandidates}
+              elections={getElectionsByCity()}
+            />
           </div>
         </section>
       </>
