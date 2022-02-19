@@ -1,8 +1,8 @@
 import React from "react";
 import { numberFormatter } from "../helpers/numberFormatter";
 
-export default function CityDetails({ selectedCity = {} }) {
-  const { id, name, presence, absence, votingPopulation } = selectedCity;
+export default function CityDetails({ selectedCity = {}, candidates = 0 }) {
+  const { id, name, votingPopulation, absence, presence } = selectedCity;
   return (
     <div id={id}>
       <div className="text-center font-bold mb-2 p-2">
@@ -21,6 +21,9 @@ export default function CityDetails({ selectedCity = {} }) {
           <span className="font-bold">Comparecimento: </span>
           {numberFormatter(presence)}
         </div>
+      </div>
+      <div className="text-center mb-2 p-2">
+        <span>{candidates} candidatos</span>
       </div>
     </div>
   );

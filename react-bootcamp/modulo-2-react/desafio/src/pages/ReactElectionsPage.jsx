@@ -42,8 +42,9 @@ export default function ReactElectionsPage() {
     getData();
   }, []);
 
-  function handleCityChange(evt) {
-    console.log(evt);
+  function handleCityChange(cityId) {
+    const index = allCities.findIndex((city) => city.id === cityId);
+    setSelectedCity(allCities[index]);
   }
 
   let mainJsx = (

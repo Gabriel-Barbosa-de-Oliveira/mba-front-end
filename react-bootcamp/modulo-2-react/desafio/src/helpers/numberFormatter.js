@@ -1,3 +1,6 @@
 export function numberFormatter(stringNumber) {
-  return stringNumber.toLocaleString();
+  if (stringNumber)
+    return stringNumber.toLocaleString();
+  else
+    return "";
 }
