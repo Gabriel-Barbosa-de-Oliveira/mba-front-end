@@ -7,6 +7,7 @@ import { getDataFromApi } from "../services/apiService";
 import SelectInput from "../components/SelectInput";
 import CityDetails from "../components/CityDetails";
 import ElectionsDetails from "../components/ElectionsDetails";
+import _ from "lodash";
 
 export default function ReactElectionsPage() {
   const [loading, setLoading] = useState(true);
@@ -22,10 +23,6 @@ export default function ReactElectionsPage() {
         const cities = await getDataFromApi("/cities");
         const candidates = await getDataFromApi("/candidates");
         const election = await getDataFromApi("/election");
-
-        console.log(cities);
-        console.log(candidates);
-        console.log(election);
 
         setAllCities(cities);
         setSelectedCity(cities[0]);
@@ -54,7 +51,11 @@ export default function ReactElectionsPage() {
   }
 
   function getElectionsByCity() {
-    return elections.filter((election) => election.cityId === selectedCity.id);
+    return _.orderBy(
+      elections.filter((election) => election.cityId === selectedCity.id),
+      ["votes"],
+      ["desc"]
+    );
   }
 
   let mainJsx = (
