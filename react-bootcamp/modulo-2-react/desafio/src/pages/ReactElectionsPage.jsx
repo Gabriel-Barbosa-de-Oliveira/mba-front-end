@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Main from "../components/Main";
 import { getDataFromApi } from "../services/apiService";
 import SelectInput from "../components/SelectInput";
+import CityDetails from "../components/CityDetails";
 
 export default function ReactElectionsPage() {
   const [loading, setLoading] = useState(true);
@@ -12,6 +13,7 @@ export default function ReactElectionsPage() {
   const [allCities, setAllCities] = useState([]);
   const [allCandidates, setAllCandidates] = useState([]);
   const [election, setElection] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -25,6 +27,7 @@ export default function ReactElectionsPage() {
         console.log(election);
 
         setAllCities(cities);
+        setSelectedCity(cities[0]);
         setAllCandidates(candidates);
         setElection(election);
 
@@ -56,12 +59,17 @@ export default function ReactElectionsPage() {
   if (!loading && !error) {
     mainJsx = (
       <>
-        <div className="text-center mb-4">
+        <header className="text-center">
           <span>Escolha o município</span>
-        </div>
-        <div className="flex flex-row items-center justify-center space-x-4">
+        </header>
+        <section className="flex flex-row items-center justify-center space-x-4">
           <SelectInput options={allCities} onSelectChange={handleCityChange} />
-        </div>
+        </section>
+        <section className="border">
+          <div>
+            <CityDetails selectedCity={selectedCity} />
+          </div>
+        </section>
       </>
     );
   }
