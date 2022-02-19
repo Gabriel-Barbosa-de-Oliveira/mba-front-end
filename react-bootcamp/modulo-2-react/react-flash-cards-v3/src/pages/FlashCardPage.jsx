@@ -18,7 +18,8 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import FlashCardItem from "../components/FlashCardItem";
 import FlashCardForm from "../components/FlashCardForm";
-import { getNewId } from "../services/idService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function FlashCardPage() {
   // Back End
   const [allCards, setAllCards] = useState([]);
@@ -96,6 +97,7 @@ export default function FlashCardPage() {
       //Front End
       setAllCards(allCards.filter((card) => card.id !== cardId));
       setError("");
+      toast.success("Card Excluído com sucesso!");
     } catch (error) {
       setError(error.message);
     }
@@ -124,6 +126,8 @@ export default function FlashCardPage() {
 
         //Front End
         setAllCards([...allCards, handleNewFlashCard]);
+        setError("");
+        toast.success(`Card "${title}" incluído com sucesso!`);
       } catch (error) {
         setError(error.message);
       }
@@ -145,6 +149,7 @@ export default function FlashCardPage() {
         setSelectedFlashCard(null);
         setCreateMode(true);
         setError("");
+        toast.success(`Card "${title}" alterado com sucesso!`);
       } catch (error) {
         setError(error.message);
       }
@@ -238,6 +243,7 @@ export default function FlashCardPage() {
 
   return (
     <>
+      <ToastContainer />
       <Header>react-flash-cards-v3</Header>
 
       <Main>{mainJsx}</Main>
