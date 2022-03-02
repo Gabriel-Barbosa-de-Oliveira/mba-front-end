@@ -1,4 +1,5 @@
 import { getEventsEndpoint } from "./interfaces/backend";
+import { Button } from "@material-ui/core";
 
 function App() {
   getEventsEndpoint().then((events) => {
@@ -7,7 +8,12 @@ function App() {
     }
   });
 
-  return <div>Olá</div>;
+  return (
+    <Button color="primary" variant="contained">
+      {" "}
+      Hello World
+    </Button>
+  );
 }
 
 export default App;
