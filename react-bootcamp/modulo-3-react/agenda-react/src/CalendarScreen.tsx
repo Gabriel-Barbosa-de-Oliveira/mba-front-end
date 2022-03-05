@@ -13,12 +13,15 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Icon from "@material-ui/core/Icon";
 import Avatar from "@material-ui/core/Avatar";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   getCalendarsEndpoint,
   getEventsEndpoint,
   ICalendar,
   IEvent,
 } from "./interfaces/backend";
+import { formatMonth, addMonths } from "./dateFunctions";
 
 const useStyles = makeStyles({
   root: {},
@@ -61,13 +64,15 @@ const useStyles = makeStyles({
 const DAYS_OF_WEEK = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
 
 export default function CalendarScreen() {
+  const { month } = useParams<{ month: string }>();
+  console.log(month);
   const classes = useStyles();
   const [events, setEvents] = useState<IEvent[]>([]);
   const [calendars, setCalendars] = useState<ICalendar[]>([]);
   const [calendarsSelected, setCalendarsSelected] = useState<boolean[]>([]);
 
   const weeks = generateCalendar(
-    getToday(),
+    month + "-01",
     events,
     calendars,
     calendarsSelected
@@ -126,15 +131,23 @@ export default function CalendarScreen() {
       <Box flex="1" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center" padding="8px 16px">
           <Box flex="1">
-            <IconButton aria-label="Mês Anterior">
+            <IconButton
+              aria-label="Mês Anterior"
+              component={Link}
+              to={"/calendar/" + addMonths(month, -1)}
+            >
               <Icon>chevron_left</Icon>
             </IconButton>
-            <IconButton aria-label="Próximo Mês">
+            <IconButton
+              aria-label="Próximo Mês"
+              component={Link}
+              to={"/calendar/" + addMonths(month, 1)}
+            >
               <Icon>chevron_right</Icon>
             </IconButton>
           </Box>
           <Box flex="1" marginLeft="14px" component="h3">
-            Junho de 2021
+            {formatMonth(month)}
           </Box>
           <IconButton aria-label="Usuário">
             <Avatar>
@@ -254,8 +267,4 @@ function generateCalendar(
   } while (currentDay.getMonth() === currentMonth);
 
   return weeks;
-}
-
-function getToday() {
-  return "2021-06-17";
 }
