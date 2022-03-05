@@ -13,7 +13,12 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Icon from "@material-ui/core/Icon";
 import Avatar from "@material-ui/core/Avatar";
-import { getEventsEndpoint, IEvent } from "./interfaces/backend";
+import {
+  getCalendarsEndpoint,
+  getEventsEndpoint,
+  ICalendar,
+  IEvent,
+} from "./interfaces/backend";
 
 const useStyles = makeStyles({
   root: {},
@@ -45,6 +50,12 @@ const useStyles = makeStyles({
     whiteSpace: "nowrap",
     margin: "4px 0",
   },
+  eventBackground: {
+    display: "inline-block",
+    color: "white",
+    padding: "2px 4px",
+    borderRadius: "4px",
+  },
 });
 
 const DAYS_OF_WEEK = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
@@ -52,12 +63,20 @@ const DAYS_OF_WEEK = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
 export default function CalendarScreen() {
   const classes = useStyles();
   const [events, setEvents] = useState<IEvent[]>([]);
-  const weeks = generateCalendar(getToday(), events);
+  const [calendars, setCalendars] = useState<ICalendar[]>([]);
+
+  const weeks = generateCalendar(getToday(), events, calendars);
   const firstDate = weeks[0][0].date;
   const lastDate = weeks[weeks.length - 1][6].date;
 
   useEffect(() => {
-    getEventsEndpoint(firstDate, lastDate).then(setEvents);
+    Promise.all([
+      getCalendarsEndpoint(),
+      getEventsEndpoint(firstDate, lastDate),
+    ]).then(([calendars, events]) => {
+      setCalendars(calendars);
+      setEvents(events);
+    });
   }, [firstDate, lastDate]);
 
   return (
@@ -113,19 +132,34 @@ export default function CalendarScreen() {
                 {week.map((cell) => (
                   <TableCell align="center" key={cell.date}>
                     <div className={classes.dayOfMonth}>{cell.dayOfMonth}</div>
-                    {cell.events.map((event) => (
-                      <button className={classes.events}>
-                        {event.time && (
-                          <Icon fontSize="inherit">watch_later</Icon>
-                        )}
-                        {event.time && (
-                          <Box component="span" margin="0 4px">
-                            {event.time}
-                          </Box>
-                        )}
-                        <span>{event.desc}</span>
-                      </button>
-                    ))}
+                    {cell.events.map((event) => {
+                      const color = event.calendar.color;
+
+                      return (
+                        <button className={classes.events}>
+                          {event.time && (
+                            <>
+                              <Icon style={{ color }} fontSize="inherit">
+                                watch_later
+                              </Icon>
+                              <Box component="span" margin="0 4px">
+                                {event.time}
+                              </Box>
+                            </>
+                          )}
+                          {event.time ? (
+                            <span>{event.desc}</span>
+                          ) : (
+                            <span
+                              className={classes.eventBackground}
+                              style={{ backgroundColor: color }}
+                            >
+                              {event.desc}
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
                   </TableCell>
                 ))}
               </TableRow>
@@ -140,12 +174,13 @@ export default function CalendarScreen() {
 interface ICalendarCell {
   date: string;
   dayOfMonth: number;
-  events: IEvent[];
+  events: (IEvent & { calendar: ICalendar })[];
 }
 
 function generateCalendar(
   date: string,
-  allEvents: IEvent[]
+  allEvents: IEvent[],
+  calendars: ICalendar[]
 ): ICalendarCell[][] {
   const weeks: ICalendarCell[][] = [];
   const jsDate = new Date(date + "T12:00:00");
@@ -165,7 +200,12 @@ function generateCalendar(
       week.push({
         dayOfMonth: currentDay.getDate(),
         date: isoDate,
-        events: allEvents.filter((e) => e.date === isoDate),
+        events: allEvents
+          .filter((e) => e.date === isoDate)
+          .map((e) => {
+            const calendar = calendars.find((cal) => cal.id === e.calendarId)!;
+            return { ...e, calendar };
+          }),
       });
       currentDay.setDate(currentDay.getDate() + 1);
     }
