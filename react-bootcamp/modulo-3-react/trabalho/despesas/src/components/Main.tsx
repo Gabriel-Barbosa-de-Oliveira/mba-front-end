@@ -5,19 +5,27 @@ import Table from "./DataTable";
 import Total from "./Total";
 import "../css/Main.css";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function Main() {
   const [despesas, setDespesas] = useState<Array<IDespesa>>([]);
   const [total, setTotal] = useState<number>(0);
-  const month: string = "01";
-  const year: string = "2021";
-
+  const { mes } = useParams<{ mes: string }>();
+  const splitedMonth = mes.split("-");
+  let month: string = splitedMonth[1];
+  let year: string = splitedMonth[0];
+  console.log(splitedMonth);
   useEffect(() => {
-    getDespesasEndpoint(month, year).then((despesas: Array<IDespesa>) => {
-      console.log(despesas);
-      setDespesas(despesas);
-      sumDespesas(despesas);
-    });
+    getDespesasEndpoint(`${year}-${month}`).then(
+      (despesas: Array<IDespesa>) => {
+        console.log(despesas);
+        setDespesas(despesas);
+        sumDespesas(despesas);
+        const splitedMonth = mes.split("-");
+        month = splitedMonth[1];
+        year = splitedMonth[0];
+      }
+    );
   }, [month, year]);
 
   function sumDespesas(despesas: Array<IDespesa>): void {
