@@ -1,4 +1,4 @@
-export interface IDespesas {
+export interface IDespesa {
   id: number;
   descricao: string;
   categoria: string;
