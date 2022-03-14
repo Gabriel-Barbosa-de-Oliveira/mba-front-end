@@ -4,3 +4,11 @@
   justify-content: space-between;
   margin-bottom: 32px;
 }
+
+.main-section {
+  padding: 32px;
+}
+
+.content-section {
+  margin-top: 32px;
+}
