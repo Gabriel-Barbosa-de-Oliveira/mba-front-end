@@ -13,6 +13,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Summary from "./Summary";
 import { sumDespesas } from "../functions/sumDespesasValor";
+import { UserMenu } from "./UserMenu";
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -48,13 +49,17 @@ export default function Main() {
     <>
       <section className="main-section">
         <header className="header-section">
+          <h2>Despesas</h2>
+          <UserMenu />
+        </header>
+        <section className="header-section">
           <div className="date">
             <Date />
           </div>
           <div className="total">
             <Total total={total} />
           </div>
-        </header>
+        </section>
         <Paper className={classes.root}>
           <Tabs
             value={value}
