@@ -20,12 +20,13 @@ const useStyles = makeStyles({
 export default function Summary(props: DataTableProps) {
   const classes = useStyles();
   const data = _.groupBy(props.data, "categoria");
-  const formattedValues: Array<any> = [];
+  const categoryValues: Array<any> = [];
   Object.keys(data).forEach((key, index) => {
     const value: number = sumDespesas(data[key]);
-    formattedValues.push({ name: key, id: index, value });
+    categoryValues.push({ name: key, id: index, value });
   });
-  console.log(formattedValues);
+  const orderedValues = _.orderBy(categoryValues, ["value"], ["desc"]);
+  console.log(orderedValues);
 
   return (
     <TableContainer component={Paper}>
@@ -37,7 +38,7 @@ export default function Summary(props: DataTableProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {formattedValues.map((despesa: any) => (
+          {orderedValues.map((despesa: any) => (
             <TableRow key={despesa.id}>
               <TableCell align="left">{despesa.name}</TableCell>
               <TableCell align="right">

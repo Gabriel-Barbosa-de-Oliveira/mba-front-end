@@ -6,7 +6,7 @@ export function sumDespesas(despesas: Array<IDespesa>): number {
     total = despesa.valor + total;
   });
   total = formatCurrency(total);
-  return (total as any).toFixed(2);
+  return Number((total as any).toFixed(2));
 }
 
 function formatCurrency(total: number) {
