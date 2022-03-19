@@ -1,5 +1,5 @@
 import "./App.css";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 const StyleHeader = styled.h1`
   color: #3636e9;
@@ -16,6 +16,21 @@ type TStyledButtonProps = {
   variant?: "success" | "failed";
 };
 
+const RotateKeyFrame = keyframes`
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+`;
+
+const Rotate = styled.div`
+  animation: ${RotateKeyFrame} 0.5s;
+  width: 100px;
+`;
+
 const StyleButton = styled.button<TStyledButtonProps>`
   background-color: transparent;
   border-radius: 8px;
@@ -24,6 +39,7 @@ const StyleButton = styled.button<TStyledButtonProps>`
 
   :hover {
     cursor: pointer;
+    animation: ${RotateKeyFrame} 0.5s;
   }
 
   ${(props) => {
@@ -49,7 +65,7 @@ function App() {
       <StyleData>barbosagabrieloliveira@hotmail.com</StyleData>
       <StyleData>(12) 99239-9504</StyleData>
       <StyleData>Brasil</StyleData>
-
+      <Rotate>teste</Rotate>
       <StyleButton variant="success">Adicionar</StyleButton>
       <StyleButton style={{ marginLeft: "8px" }} variant="failed">
         Remover
