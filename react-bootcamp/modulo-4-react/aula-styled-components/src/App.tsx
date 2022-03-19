@@ -21,7 +21,10 @@ const StyleButton = styled.button<TStyledButtonProps>`
   border-radius: 8px;
   border: 1px solid black;
   padding: 8px 16px;
-  cursor: pointer;
+
+  :hover {
+    cursor: pointer;
+  }
 
   ${(props) => {
     if (props.variant === "success") {
