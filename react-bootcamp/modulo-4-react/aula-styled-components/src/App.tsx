@@ -1,5 +1,5 @@
 import "./App.css";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyleHeader = styled.h1`
   color: #3636e9;
@@ -12,22 +12,31 @@ const StyleData = styled("p")`
   color: #8d8dff;
 `;
 
-const StyleButton = styled.button`
+type TStyledButtonProps = {
+  variant?: "success" | "failed";
+};
+
+const StyleButton = styled.button<TStyledButtonProps>`
   background-color: transparent;
   border-radius: 8px;
   border: 1px solid black;
   padding: 8px 16px;
   cursor: pointer;
-`;
 
-const StyleSuccessButton = styled(StyleButton)`
-  border-color: green;
-  color: green;
-`;
-
-const StyleFailedButton = styled(StyleButton)`
-  border-color: red;
-  color: red;
+  ${(props) => {
+    if (props.variant === "success") {
+      return css`
+        border-color: green;
+        color: green;
+      `;
+    }
+    if (props.variant === "failed") {
+      return css`
+        border-color: red;
+        color: red;
+      `;
+    }
+  }};
 `;
 
 function App() {
@@ -38,9 +47,11 @@ function App() {
       <StyleData>(12) 99239-9504</StyleData>
       <StyleData>Brasil</StyleData>
 
-      <StyleSuccessButton>Adicionar</StyleSuccessButton>
-      <StyleFailedButton>Remover</StyleFailedButton>
-      <StyleButton>Detalhes</StyleButton>
+      <StyleButton variant="success">Adicionar</StyleButton>
+      <StyleButton style={{ marginLeft: "8px" }} variant="failed">
+        Remover
+      </StyleButton>
+      <StyleButton style={{ marginLeft: "8px" }}>Detalhes</StyleButton>
     </div>
   );
 }
