@@ -1,15 +1,16 @@
 import "./App.css";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes, ThemeProvider } from "styled-components";
+import { useState } from "react";
 
 const StyleHeader = styled.h1`
-  color: #3636e9;
+  color: ${(props) => props.theme.main};
   font-size: 42px;
 `;
 
 const StyleData = styled("p")`
   font-size: 24px;
   font-weight: 700;
-  color: #8d8dff;
+  color: ${(props) => props.theme.secondary};
 `;
 
 type TStyledButtonProps = {
@@ -26,10 +27,15 @@ const RotateKeyFrame = keyframes`
   }
 `;
 
-const Rotate = styled.div`
-  animation: ${RotateKeyFrame} 0.5s;
-  width: 100px;
-`;
+const themeBlue = {
+  main: "blue",
+  secondary: "#8d8dff",
+};
+
+const themeRed = {
+  main: "red",
+  secondary: "#ff4343",
+};
 
 const StyleButton = styled.button<TStyledButtonProps>`
   background-color: transparent;
@@ -39,7 +45,7 @@ const StyleButton = styled.button<TStyledButtonProps>`
 
   :hover {
     cursor: pointer;
-    animation: ${RotateKeyFrame} 0.5s;
+    background-color: #f2f2f2;
   }
 
   ${(props) => {
@@ -59,18 +65,32 @@ const StyleButton = styled.button<TStyledButtonProps>`
 `;
 
 function App() {
+  const [theme, setTheme] = useState(themeBlue);
   return (
     <div className="App">
-      <StyleHeader>Gabriel Barbosa de Oliveira</StyleHeader>
-      <StyleData>barbosagabrieloliveira@hotmail.com</StyleData>
-      <StyleData>(12) 99239-9504</StyleData>
-      <StyleData>Brasil</StyleData>
-      <Rotate>teste</Rotate>
-      <StyleButton variant="success">Adicionar</StyleButton>
-      <StyleButton style={{ marginLeft: "8px" }} variant="failed">
-        Remover
-      </StyleButton>
-      <StyleButton style={{ marginLeft: "8px" }}>Detalhes</StyleButton>
+      <ThemeProvider theme={theme}>
+        <StyleHeader>Gabriel Barbosa de Oliveira</StyleHeader>
+        <div>
+          <StyleButton onClick={() => setTheme(themeBlue)}>
+            Set Blue Theme
+          </StyleButton>
+          <StyleButton
+            style={{ marginLeft: "8px" }}
+            onClick={() => setTheme(themeRed)}
+          >
+            Set Red Theme
+          </StyleButton>
+        </div>
+        <StyleData>barbosagabrieloliveira@hotmail.com</StyleData>
+        <StyleData>(12) 99239-9504</StyleData>
+        <StyleData>Brasil</StyleData>
+
+        <StyleButton variant="success">Adicionar</StyleButton>
+        <StyleButton style={{ marginLeft: "8px" }} variant="failed">
+          Remover
+        </StyleButton>
+        <StyleButton style={{ marginLeft: "8px" }}>Detalhes</StyleButton>
+      </ThemeProvider>
     </div>
   );
 }
