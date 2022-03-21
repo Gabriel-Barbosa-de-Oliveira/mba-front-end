@@ -15,7 +15,7 @@ const Products = () => {
         return (
           <li key={product.id}>
             <Link href={`/examples/products/${product.id}`}>
-              {product.name}
+              <a>{product.name}</a>
             </Link>
           </li>
         );
