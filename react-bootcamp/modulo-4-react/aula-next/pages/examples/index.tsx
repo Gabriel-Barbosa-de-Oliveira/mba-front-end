@@ -1,4 +1,4 @@
 const Index = () => {
-  return <div>I'm the Index</div>;
+  return <div>Im the Index</div>;
 };
 export default Index;
