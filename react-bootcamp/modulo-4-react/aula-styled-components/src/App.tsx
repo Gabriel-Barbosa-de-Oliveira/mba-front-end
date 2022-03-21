@@ -17,7 +17,7 @@ type TStyledButtonProps = {
   variant?: "success" | "failed";
 };
 
-const RotateKeyFrame = keyframes`
+const RotateKeyFrame = keyframes` 
   from {
     transform: rotate(0deg)
   }
