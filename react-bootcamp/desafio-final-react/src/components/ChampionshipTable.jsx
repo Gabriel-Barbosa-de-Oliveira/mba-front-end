@@ -7,8 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-export default function ChampionshipTable({ championship }) {
-  console.log(championship);
+export default function ChampionshipTable({ championship = [] }) {
   const formattedChampionship = championship.slice().reverse();
   return (
     <TableContainer component={Paper}>
@@ -26,13 +25,13 @@ export default function ChampionshipTable({ championship }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {formattedChampionship.map((row) => (
+          {formattedChampionship.map((row, index) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {index + 1} {row.name}
               </TableCell>
               <TableCell align="right">{row.totalPoints}</TableCell>
               <TableCell align="right">{row.wins}</TableCell>

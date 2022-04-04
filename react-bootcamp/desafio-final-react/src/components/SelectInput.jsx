@@ -1,7 +1,6 @@
 export default function SelectInput({
   options = [],
   onSelectChange = null,
-  id = null,
   autoFocus = false,
 }) {
   function handleSelectChange({ currentTarget }) {
@@ -14,7 +13,7 @@ export default function SelectInput({
     <div className="flex flex-col my-4">
       <select
         autoFocus={autoFocus}
-        id={id}
+        id="1"
         className="border p-1"
         onChange={handleSelectChange}
       >

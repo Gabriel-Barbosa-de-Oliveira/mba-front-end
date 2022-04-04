@@ -1,92 +1,89 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Header from './components/Header'
 import Main from './components/Main'
 import { read } from "./services/apiService";
 import _ from 'lodash'
 import ChampionshipTable from "./components/ChampionshipTable";
+import setNewChampionship from "./services/championshipHandler";
+import SelectInput from "./components/SelectInput";
 export default function App() {
 
   const [currentYear, setCurrentYear] = useState('2003');
   const [championship, setChampionship] = useState([]);
+  const years = [
+    {
+      id: '2003',
+      value: '2003',
+      name: '2003'
+    }, {
+      id: '2004',
+      value: '2004',
+      name: '2004'
+    }, {
+      id: '2005',
+      value: '2005',
+      name: '2005'
+    }, {
+      id: '2006',
+      value: '2006',
+      name: '2006'
+    }, {
+      id: '2007',
+      value: '2007',
+      name: '2007'
+    }, {
+      id: '2008',
+      value: '2008',
+      name: '2008'
+    }, {
+      id: '2009',
+      value: '2009',
+      name: '2009'
+    }, {
+      id: '2010',
+      value: '2010',
+      name: '2010'
+    }, {
+      id: '2011',
+      value: '2011',
+      name: '2011'
+    }, {
+      id: '2012',
+      value: '2012',
+      name: '2012'
+    }, {
+      id: '2013',
+      value: '2013',
+      name: '2013'
+    }, {
+      id: '2014',
+      value: '2014',
+      name: '2014'
+    }, {
+      id: '2015',
+      value: '2015',
+      name: '2015'
+    }
+  ]
 
   useEffect(() => {
     async function getDataFromSelectedYear() {
-      setNewChampionship(await read(`/${currentYear}`));
+      setChampionship(setNewChampionship(await read(`/${currentYear}`)));
     }
 
     getDataFromSelectedYear();
   }, [currentYear]);
 
-  let buildedChampionship = [];
-
-
-  function setNewChampionship(rounds) {
-    // console.log(rounds)
-    buildedChampionship = [];
-    debugger
-    rounds.forEach(round => {
-      round.partidas.forEach(match => {
-        analyseMatchDetails(match);
-      })
-    })
-
+  function handleSelectChange(value) {
+    setCurrentYear(value)
   }
-
-  function analyseMatchDetails(match) {
-    const awaySquad = {};
-    const homeSquad = {};
-
-    homeSquad.name = match.mandante;
-    homeSquad.wins = match.pontuacao_geral_mandante.total_vitorias
-    homeSquad.loses = match.pontuacao_geral_mandante.total_derrotas
-    homeSquad.draws = match.pontuacao_geral_mandante.total_empates
-    homeSquad.goals = match.placar_mandante;
-    homeSquad.sufferedGoals = match.placar_visitante;
-    homeSquad.totalGoals = homeSquad.goals - homeSquad.sufferedGoals;
-    homeSquad.totalPoints = match.pontuacao_geral_mandante.total_vitorias * 3 + match.pontuacao_geral_mandante.total_empates;
-
-
-    const homeIndex = buildedChampionship.findIndex(squad => { return squad.name.toLowerCase() === homeSquad.name.toLowerCase() });
-    if (homeIndex === -1) {
-      buildedChampionship.push(homeSquad);
-    } else {
-      homeSquad.goals = match.placar_mandante + buildedChampionship[homeIndex].goals;
-      homeSquad.sufferedGoals = match.placar_visitante + buildedChampionship[homeIndex].sufferedGoals;
-      homeSquad.totalGoals = homeSquad.totalGoals + buildedChampionship[homeIndex].totalGoals;
-      buildedChampionship[homeIndex] = homeSquad;
-    }
-
-    awaySquad.name = match.visitante;
-    awaySquad.wins = match.pontuacao_geral_visitante.total_vitorias
-    awaySquad.loses = match.pontuacao_geral_visitante.total_derrotas
-    awaySquad.draws = match.pontuacao_geral_visitante.total_empates
-    awaySquad.goals = match.placar_visitante;
-    awaySquad.sufferedGoals = match.placar_mandante;
-    awaySquad.totalGoals = awaySquad.goals - awaySquad.sufferedGoals;
-    awaySquad.totalPoints = match.pontuacao_geral_visitante.total_vitorias * 3 + match.pontuacao_geral_visitante.total_empates;
-
-
-
-    const awayIndex = buildedChampionship.findIndex(squad => { return squad.name.toLowerCase() === awaySquad.name.toLowerCase() });
-    if (awayIndex === -1) {
-      buildedChampionship.push(awaySquad);
-    } else {
-      awaySquad.goals = match.placar_visitante + buildedChampionship[awayIndex].goals;
-      awaySquad.sufferedGoals = match.placar_mandante + buildedChampionship[awayIndex].sufferedGoals;
-      awaySquad.totalGoals = awaySquad.totalGoals + buildedChampionship[awayIndex].totalGoals;
-      buildedChampionship[awayIndex] = awaySquad;
-    }
-
-    // console.log(_.orderBy(buildedChampionship, ['totalPoints', 'wins', 'draws', 'loses', 'goals', 'sufferedGoals', 'totalGoals'], ['asc']))
-    setChampionship(_.orderBy(buildedChampionship, ['totalPoints', 'wins', 'draws', 'loses', 'goals', 'sufferedGoals', 'totalGoals'], ['asc']))
-  }
-
-
 
   return (
     <div>
       <Header>Tabela Brasileirão</Header>
-
+      <section className="select-input-container">
+        <SelectInput options={years} onSelectChange={handleSelectChange} />
+      </section>
       <Main>
         <ChampionshipTable championship={championship} />
       </Main>
