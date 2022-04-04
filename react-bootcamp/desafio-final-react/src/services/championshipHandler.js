@@ -17,6 +17,7 @@ function analyseMatchDetails(match) {
   const homeSquad = {};
 
   homeSquad.name = match.mandante;
+  homeSquad.slug = clean_url(match.mandante)
   homeSquad.wins = match.pontuacao_geral_mandante.total_vitorias
   homeSquad.loses = match.pontuacao_geral_mandante.total_derrotas
   homeSquad.draws = match.pontuacao_geral_mandante.total_empates
@@ -37,6 +38,7 @@ function analyseMatchDetails(match) {
   }
 
   awaySquad.name = match.visitante;
+  awaySquad.slug = clean_url(match.visitante)
   awaySquad.wins = match.pontuacao_geral_visitante.total_vitorias
   awaySquad.loses = match.pontuacao_geral_visitante.total_derrotas
   awaySquad.draws = match.pontuacao_geral_visitante.total_empates
@@ -56,6 +58,17 @@ function analyseMatchDetails(match) {
     awaySquad.totalGoals = awaySquad.totalGoals + buildedChampionship[awayIndex].totalGoals;
     buildedChampionship[awayIndex] = awaySquad;
   }
+}
+
+function clean_url(s) {
+  return s.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, "") //remove diacritics
+    .toLowerCase()
+    .replace(/\s+/g, '_') //spaces to dashes
+    .replace(/&/g, '-and-') //ampersand to and
+    .replace(/[^\w\-]+/g, '') //remove non-words
+    .replace(/\-\-+/g, '_') //collapse multiple dashes
+    .replace(/^-+/, '') //trim starting dash
+    .replace(/-+$/, ''); //trim ending dash
 }
 
 export default setNewChampionship;

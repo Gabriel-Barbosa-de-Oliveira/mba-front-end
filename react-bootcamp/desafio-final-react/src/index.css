@@ -25,3 +25,15 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.img-container {
+  display: grid;
+  grid-template-columns: 25px 40px auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.squad-logo {
+  width: 30px;
+  heigth: 30px;
+}

@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 
 export default function ChampionshipTable({ championship = [] }) {
   const formattedChampionship = championship.slice().reverse();
+  console.log(formattedChampionship);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -31,7 +32,15 @@ export default function ChampionshipTable({ championship = [] }) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {index + 1} {row.name}
+                <div className="img-container">
+                  {index + 1}{" "}
+                  <img
+                    src={require(`../../img/${row.slug}.png`).default}
+                    className={"squad-logo"}
+                    alt={row.name}
+                  />{" "}
+                  {row.name}
+                </div>
               </TableCell>
               <TableCell align="right">{row.totalPoints}</TableCell>
               <TableCell align="right">{row.wins}</TableCell>
