@@ -10,9 +10,11 @@ main
   width: 1200px
   margin: 0 auto
   display: grid
-  grid-template-columns: (4, 1fr)
+  column-gap: 10px
+  row-gap: 10px
+  grid-template-columns: (4, 1f)
   grid-template-rows: auto
-  grid-template-areas: "about about about" "quote quote quote" "job-exp__experience job-exp__experience job-exp__experience job-exp__skills" "education__college education__college education__others education__others"
+  grid-template-areas: "about about about about" "quote quote quote quote" "job-exp job-exp job-exp skills" "education education extracurricular extracurricular"
 
 header
   nav
@@ -23,8 +25,8 @@ header
     a
       text-decoration: none
       color: white
-    h1
-      text-align: center
+  h1
+    text-align: center
 
 #about
   grid-area: about
@@ -49,26 +51,26 @@ header
     font-size: 1.4em
 
 #job-exp
+  grid-area: job-exp
   background-color: rgb(236, 236 ,236)
 
   #job-exp__experience
-    grid-area: job-exp__experience
     .jog-exp__jobs
       background-color: $purple-light
       .jog-exp__company-logo
         max-width: 100px
         height: auto
-    #job-exp__skills
-      grid-area: job-exp__skills
-      background-color: white
+
+#skills
+  grid-area: skills
+  background-color: white
 
 #education
-  #education__college
-    grid-area: education__college
-    background-color: white
-  #education__others
-    grid-area: education__others
-    background-color: $purple-light
+  grid-area: education
+  background-color: white
+#extracurricular
+  grid-area: extracurricular
+  background-color: $purple-light
 
 footer
   background-color: rgb(62,62,62)
