@@ -142,4 +142,33 @@ footer #footer_copyrights p {
   align-self: flex-end;
 }
 
+@media (max-width: 480px) {
+  main {
+    grid-template-columns: 100%;
+    grid-template-areas: "main-title" "about" "quote" "job-exp" "skills" "education" "extracurricular";
+  }
+  main #about {
+    flex-flow: column wrap;
+    justify-content: center;
+  }
+  main #about #about__photo {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  main #about #about__photo #about__text-cnt {
+    padding: 20px;
+  }
+  main #job-exp #job-exp__experience {
+    grid-template-columns: 100%;
+    grid-template-areas: "job1" "job2" "job3" "job4" "job5";
+  }
+  main #job-exp #jog-exp__job1, main #job-exp #jog-exp__job1, main #job-exp #jog-exp__job1 {
+    display: flex;
+    align-items: center;
+  }
+  main #footer {
+    flex-flow: column wrap;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
