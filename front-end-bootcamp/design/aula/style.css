@@ -4,16 +4,20 @@ body {
 }
 
 main {
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   column-gap: 10px;
   row-gap: 10px;
-  grid-template-columns: 4, 1f;
+  grid-template-columns: 4, 1fr;
   grid-template-rows: auto;
-  grid-template-areas: "about about about about" "quote quote quote quote" "job-exp job-exp job-exp skills" "education education extracurricular extracurricular";
+  grid-template-areas: "main-title main-title main-title main-title" "about about about about" "quote quote quote quote" "job-exp job-exp job-exp skills" "education education extracurricular extracurricular";
 }
 
+header {
+  position: sticky;
+  top: 0;
+}
 header nav {
   background-color: rgb(175, 43, 207);
   display: flex;
@@ -24,13 +28,16 @@ header nav a {
   text-decoration: none;
   color: white;
 }
-header h1 {
+
+#main-title {
+  grid-area: main-title;
   text-align: center;
 }
 
 #about {
   grid-area: about;
   display: flex;
+  flex-flow: row nowrap;
 }
 #about #about__photo {
   max-width: 200px;
@@ -39,6 +46,7 @@ header h1 {
 #about #about__text-cnt {
   background-color: white;
   padding: 50px;
+  width: 100%;
 }
 
 #quote {
@@ -55,28 +63,63 @@ header h1 {
 #job-exp {
   grid-area: job-exp;
   background-color: rgb(236, 236, 236);
+  padding: 20px;
+}
+#job-exp #job-exp__experience {
+  display: grid;
+  grid-template-columns: 6, 1fr;
+  grid-template-rows: auto;
+  column-gap: 10px;
+  row-gap: 10px;
+  grid-template-areas: "job1 job1 job2 job2 job3 job3" "job4 job4 job4 job5 job5 job5";
 }
 #job-exp #job-exp__experience .jog-exp__jobs {
+  border-radius: 10px;
+  padding: 10px;
   background-color: rgb(221, 175, 252);
 }
 #job-exp #job-exp__experience .jog-exp__jobs .jog-exp__company-logo {
-  max-width: 100px;
-  height: auto;
+  max-height: 100px;
+  width: auto;
+}
+#job-exp #job-exp__experience #jog-exp__job1 {
+  grid-area: job1;
+  text-align: center;
+}
+#job-exp #job-exp__experience #jog-exp__job2 {
+  grid-area: job2;
+  text-align: center;
+}
+#job-exp #job-exp__experience #jog-exp__job3 {
+  grid-area: job3;
+  text-align: center;
+}
+#job-exp #job-exp__experience #jog-exp__job4 {
+  grid-area: job4;
+  text-align: center;
+  display: flex;
+}
+#job-exp #job-exp__experience #jog-exp__job5 {
+  grid-area: job5;
+  text-align: center;
 }
 
 #skills {
   grid-area: skills;
   background-color: white;
+  padding: 20px;
 }
 
 #education {
   grid-area: education;
   background-color: white;
+  padding: 20px;
 }
 
 #extracurricular {
   grid-area: extracurricular;
   background-color: rgb(221, 175, 252);
+  padding: 20px;
 }
 
 footer {
