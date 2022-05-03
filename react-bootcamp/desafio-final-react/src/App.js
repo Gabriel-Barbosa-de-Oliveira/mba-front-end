@@ -8,7 +8,7 @@ import setNewChampionship from "./services/championshipHandler";
 import SelectInput from "./components/SelectInput";
 export default function App() {
 
-  const [currentYear, setCurrentYear] = useState('2003');
+  const [currentYear, setCurrentYear] = useState('2004');
   const [championship, setChampionship] = useState([]);
   const years = [
     {
@@ -68,7 +68,7 @@ export default function App() {
 
   useEffect(() => {
     async function getDataFromSelectedYear() {
-      setChampionship(setNewChampionship(await read(`/${currentYear}`)));
+      setChampionship(setNewChampionship(await read(`/2013`)));
     }
 
     getDataFromSelectedYear();
