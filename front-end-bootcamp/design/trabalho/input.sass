@@ -1,0 +1,152 @@
+$med: rgb(207, 43, 43)
+$dark: rgb(128, 0, 0)
+$light: rgb(252, 255, 214)
+
+body
+  background: lightgrey
+  margin: 0
+
+main
+  max-width: 1200px
+  margin: 0 auto
+  display: grid
+  column-gap: 10px
+  row-gap: 10px
+  grid-template-columns: (4, 1fr)
+  grid-template-rows: auto
+  grid-template-areas: "main-title main-title main-title main-title" "about about about about" "quote quote quote quote" "job-exp job-exp job-exp skills" "education education education education"
+
+header
+  position: sticky
+  top: 0
+  nav
+    background-color: $med
+    display: flex
+    justify-content: space-evenly
+    padding: 20px
+    a
+      text-decoration: none
+      color: white
+
+#main-title
+  grid-area: main-title
+  text-align: center
+
+#about
+  grid-area: about
+  display: flex
+  flex-flow: row nowrap
+
+  #about__photo
+    max-width: 300px
+    height: auto
+
+  #about__text-cnt
+    background-color: white
+    padding: 50px
+    width: 100%
+
+#quote
+  grid-area: quote
+  background-color: $dark
+  text-align: center
+  color: white
+  padding: 20px 0
+
+  #quote__cite
+    font-size: 1.4em
+
+#job-exp
+  grid-area: job-exp
+  background-color: rgb(236, 236 ,236)
+  padding: 20px
+
+  #job-exp__experience
+    display: flex
+
+    img
+      max-width: 300px
+      height: 254px
+
+    #recipes
+      padding: 20px
+      ul
+        list-style: none
+      p
+        margin: 0
+
+#skills
+  grid-area: skills
+  background-color: white
+  padding: 20px
+
+#education
+  grid-area: education
+  background-color: white
+  padding: 20px
+  h2
+    text-align: center
+
+#extracurricular
+  grid-area: extracurricular
+  background-color: $light
+  padding: 20px
+
+footer
+  background-color: rgb(62,62,62)
+  display: flex
+  flex-flow: row nowrap
+  color: lightgrey
+  justify-content: space-between
+  padding: 10px 50px
+  align-items: center
+
+  #footer__social-medias
+    .footer__social-medias_icons
+      max-width: 40px
+      height: auto
+
+  #footer__email-phone
+    p
+      margin: 0
+  #footer_copyrights
+    p
+      align-self: flex-end
+
+@media (max-width: 480px)
+  main
+    grid-template-columns: 100%
+    grid-template-areas: "main-title" "about" "quote" "job-exp" "skills" "education" "extracurricular"
+
+    #about
+      flex-flow: column wrap
+      justify-content: center
+
+      #about__photo
+        max-width: 250px
+        margin: 0 auto
+
+      #about__text-cnt
+        padding: 0
+
+    #job-exp
+      grid-area: job-exp
+      background-color: rgb(236, 236 ,236)
+      padding: 20px
+
+      #job-exp__experience
+        flex-flow: column wrap
+
+        img
+          max-width: 250px
+          margin: 0 auto
+
+        #recipes
+          padding: 20px
+          ul
+            list-style: none
+          p
+            margin: 0
+
+    #footer
+      flex-flow: column wrap
