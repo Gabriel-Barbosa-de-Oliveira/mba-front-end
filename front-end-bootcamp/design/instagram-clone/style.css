@@ -2,8 +2,24 @@
   color: black;
 }
 
+.img-dimention {
+  transform: scale(1.5);
+  width: 100%;
+}
+
 .topbar-profile-photo{
   width: 1.5em;
   height: 1.5em;
   position: relative;
+}
+
+.stories-profile-photo {
+  width: 56px;
+  height: 56px;
+  position: relative;
+}
+
+.stories-username {
+  font-size: small;
+  align-self: center;
 }
