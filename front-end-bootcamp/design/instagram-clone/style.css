@@ -1,4 +1,4 @@
-.icon-link-menu {
+.icon-link-menu, .icon-link-post {
   color: black;
 }
 
@@ -22,4 +22,11 @@
 .stories-username {
   font-size: small;
   align-self: center;
+  margin: 0;
+}
+
+.post-profile-photo{ 
+  width: 46px;
+  height: 46px;
+  position: relative;
 }
