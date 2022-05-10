@@ -3,7 +3,29 @@
   height: auto;
 }
 
-.caroulsel__item{
+.caroulsel__item {
   min-width: 100%;
   max-height: 700px;
+}
+
+.training__types {
+  width: 140px;
+  height: 140px;
+}
+
+.trail-img-section,
+.ioga-img-section {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url('./img/trilha.jpg');
+  width: 100%;
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
+.ioga-img-section {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url('./img/treino-praia.jpg');
 }
