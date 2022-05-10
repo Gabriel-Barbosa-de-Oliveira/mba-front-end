@@ -29,3 +29,7 @@
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url('./img/treino-praia.jpg');
 }
+
+.pricing__tail{
+  text-align: center;
+}
