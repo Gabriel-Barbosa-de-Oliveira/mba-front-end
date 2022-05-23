@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrencyService } from 'src/app/services/currency.service';
 
 @Component({
   selector: 'app-summary-toolbar',
@@ -10,9 +11,13 @@ export class SummaryToolbarComponent implements OnInit {
   public items: number = 0;
   public finalValue: number = 0;
 
-  constructor() { }
+  constructor(private currencyService: CurrencyService) { }
 
   ngOnInit(): void {
+  }
+
+  public convertValueToCurrencyStandard(): string {
+    return this.currencyService.convertoToSpecifiedCurrency(this.finalValue);
   }
 
 }
