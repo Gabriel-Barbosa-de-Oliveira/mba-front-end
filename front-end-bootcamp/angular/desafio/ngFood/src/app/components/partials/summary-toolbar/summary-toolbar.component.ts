@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CurrencyService } from 'src/app/services/currency.service';
 
 @Component({
@@ -8,8 +8,8 @@ import { CurrencyService } from 'src/app/services/currency.service';
 })
 export class SummaryToolbarComponent implements OnInit {
 
-  public items: number = 0;
-  public finalValue: number = 0;
+  @Input() items: number = 0;
+  @Input() finalValue: number = 0;
 
   constructor(private currencyService: CurrencyService) { }
 
