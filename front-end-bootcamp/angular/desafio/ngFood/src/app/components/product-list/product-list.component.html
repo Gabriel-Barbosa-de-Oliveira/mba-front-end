@@ -2,9 +2,14 @@
 
 <ng-container *ngFor="let category of Object.keys(products)">
   <mat-list role="list">
-    <mat-list-item role="listitem" color="warn">{{category}}</mat-list-item>
+    <mat-list-item role="listitem" color="warn"><span class="category-title">{{category}}</span></mat-list-item>
     <ng-container *ngFor="let item of products[category]; let i = index">
-      <mat-list-item role="listitem">{{item.descricao}}</mat-list-item>
+      <mat-list-item role="listitem">
+        <div class="item-display">
+          <span>{{item.descricao}}</span>
+          <span>{{convertValueToCurrencyStandard(item.preco)}}</span>
+        </div>
+      </mat-list-item>
     </ng-container>
   </mat-list>
 
