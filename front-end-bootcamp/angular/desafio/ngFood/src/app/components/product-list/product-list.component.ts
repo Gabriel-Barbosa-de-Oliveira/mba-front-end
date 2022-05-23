@@ -12,6 +12,8 @@ export class ProductListComponent implements OnInit {
   public products: any = {};
   public items: number = 0;
   public totalValue: number = 0;
+  public title: string = "Cardapio";
+  
   Object = Object;
 
   constructor(
