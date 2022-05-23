@@ -1,1 +1,11 @@
 <app-summary-toolbar></app-summary-toolbar>
+
+<ng-container *ngFor="let category of Object.keys(products)">
+  <mat-list role="list">
+    <mat-list-item role="listitem" color="warn">{{category}}</mat-list-item>
+    <ng-container *ngFor="let item of products[category]; let i = index">
+      <mat-list-item role="listitem">{{item.descricao}}</mat-list-item>
+    </ng-container>
+  </mat-list>
+
+</ng-container>

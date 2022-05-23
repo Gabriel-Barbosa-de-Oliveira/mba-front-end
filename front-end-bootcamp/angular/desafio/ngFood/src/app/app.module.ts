@@ -10,6 +10,7 @@ import { BasicToolbarComponent } from './components/partials/basic-toolbar/basic
 import { SummaryToolbarComponent } from './components/partials/summary-toolbar/summary-toolbar.component';
 import { FoodListComponent } from './components/partials/food-list/food-list.component';
 import { MaterialModule } from './modules/material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MaterialModule } from './modules/material/material.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
