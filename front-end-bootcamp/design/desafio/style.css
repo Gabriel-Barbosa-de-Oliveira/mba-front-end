@@ -8,9 +8,29 @@
   max-height: 700px;
 }
 
+.carousel-item{
+  height: 35rem;
+  background-color: #000;
+}
+
+.carousel-item > img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 35rem;
+  opacity: 0.5;
+}
+
 .training__types {
   width: 140px;
   height: 140px;
+}
+
+.training__types:hover{
+  width: 200px;
+  height: 200px;
+  transition: width 0.5s, height 0.5s;
 }
 
 .trail-img-section,
@@ -22,6 +42,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   color: #fff;
 }
 

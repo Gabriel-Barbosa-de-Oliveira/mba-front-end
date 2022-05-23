@@ -1,0 +1,30 @@
+<header class="title-container">
+  <h1>{{titulo}}</h1>
+  <ng-container *ngIf="checkIfOptionsCanBeMultiple()">
+    <p><small>Escolha até {{escolhaAte}}</small></p>
+  </ng-container>
+</header>
+<section class="options-container">
+  <ng-container *ngIf="checkIfOptionsCanBeMultiple(); else renderSelect">
+    <div>
+      <ng-container *ngFor="let option of opcoes; let i = index;">
+        <div>
+          <input type="checkbox" [(ngModel)]="option.checked" type="checkbox" [disabled]="!option.checked && maxNo" (change)="onChange(option)">
+          <label [for]="option?.name">{{option.name}}</label>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+  <form [formGroup]="form">
+
+    <ng-template #renderSelect>
+      <ng-container *ngFor="let option of opcoes; let i = index;">
+        <div>
+            <input type="radio" [id]="option?.name" [value]="option?.name" [checked]="option?.checked"
+            formControlName="opcao">
+            <label [for]="option?.name">{{option.name}}</label>
+        </div>
+      </ng-container>
+    </ng-template>
+  </form>
+</section>
