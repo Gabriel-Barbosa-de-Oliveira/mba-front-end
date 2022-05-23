@@ -1,1 +1,12 @@
-<p>summary-toolbar works!</p>
+<mat-toolbar>
+  <header class="summary-container">
+    <mat-icon [matBadge]="items" matBadgeColor="warn">home</mat-icon>
+      <span class="cdk-visually-hidden">
+        Checkout items number: {{items}}
+      </span>
+    <span>Ver Pedido</span>
+    <span>R$ {{finalValue}}</span>
+
+  </header>
+
+</mat-toolbar>

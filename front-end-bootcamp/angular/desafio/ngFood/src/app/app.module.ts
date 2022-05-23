@@ -9,6 +9,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BasicToolbarComponent } from './components/partials/basic-toolbar/basic-toolbar.component';
 import { SummaryToolbarComponent } from './components/partials/summary-toolbar/summary-toolbar.component';
 import { FoodListComponent } from './components/partials/food-list/food-list.component';
+import { MaterialModule } from './modules/material/material.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FoodListComponent } from './components/partials/food-list/food-list.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

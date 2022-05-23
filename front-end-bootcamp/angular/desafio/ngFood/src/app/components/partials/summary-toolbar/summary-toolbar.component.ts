@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryToolbarComponent implements OnInit {
 
+  public items: number = 0;
+  public finalValue: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
