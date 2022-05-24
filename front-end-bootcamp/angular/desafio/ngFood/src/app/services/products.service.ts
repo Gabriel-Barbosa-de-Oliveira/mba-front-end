@@ -44,4 +44,9 @@ export class ProductsService {
     }
     this.checkoutList.next(this.checkoutProducts);
   }
+
+  public deleteAllProducts(){
+    this.checkoutProducts = [];
+    this.checkoutList.next(this.checkoutProducts);
+  }
 }

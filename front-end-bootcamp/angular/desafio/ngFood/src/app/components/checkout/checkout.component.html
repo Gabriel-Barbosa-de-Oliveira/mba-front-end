@@ -1,1 +1,34 @@
-<p>checkout works!</p>
+<header class="product-list-header-container">
+  <app-basic-toolbar [title]="title"></app-basic-toolbar>
+</header>
+
+<section class="product-list-checkout-container">
+
+  <mat-list role="list" *ngIf="products.length > 0; else emptyState">
+    <ng-container *ngFor="let item of products; let i = index">
+      <mat-list-item role="listitem">
+        <div class="item-display">
+          <span>{{item.descricao}}</span>
+          <span>{{item.quantity}} x {{convertValueToCurrencyStandard(item.preco)}}</span>
+        </div>
+      </mat-list-item>
+    </ng-container>
+    <mat-list-item role="listitem">
+      <div class="item-display">
+        <span><b>Total: </b></span>
+        <span>{{convertValueToCurrencyStandard(totalValue)}}</span>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  <ng-template #emptyState>
+    <p>Seu Pedido Está Vazio</p>
+  </ng-template>
+  <footer class="buttons-container">
+    <div>
+      <button mat-raised-button (click)="returnToCardapio()">Incluir Mais Itens</button>
+      <button mat-raised-button class="space-button" (click)="deleteAllProducts()">Limpar</button>
+    </div>
+    <button mat-raised-button color="accent">Concluir</button>
+  </footer>
+
+</section>

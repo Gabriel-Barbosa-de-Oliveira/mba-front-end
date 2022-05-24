@@ -1,10 +1,12 @@
 <mat-toolbar color="primary">
   <header class="summary-container">
     <mat-icon [matBadge]="items" matBadgeColor="warn">home</mat-icon>
-      <span class="cdk-visually-hidden">
-        Checkout items number: {{items}}
-      </span>
-    <span>Ver Pedido</span>
+    <span class="cdk-visually-hidden">
+      Checkout items number: {{items}}
+    </span>
+    <span><a [routerLink]="['/checkout']" class="link">
+        Ver Pedido
+      </a></span>
     <span>{{convertValueToCurrencyStandard()}}</span>
   </header>
 </mat-toolbar>

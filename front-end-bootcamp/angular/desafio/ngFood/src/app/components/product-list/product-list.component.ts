@@ -34,7 +34,6 @@ export class ProductListComponent implements OnInit {
   public watchForProductRequest() {
     this.productService.formattedBackendList.subscribe((products) => {
       this.products = products;
-      console.log(this.products);
     });
   }
 
