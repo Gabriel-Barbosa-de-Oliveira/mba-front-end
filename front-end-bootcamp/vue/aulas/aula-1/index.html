@@ -43,7 +43,8 @@
       <input id="input-grade" type="text" v-model="grade">
       <p v-if="grade < 60">Reprovado</p>
       <p v-else-if="grade >= 60 && grade < 98">Aprovado</p>
-      <p v-else>Aprovado com excelência</p>
+      <p v-else-if="grade >= 98">Aprovado com excelência</p>
+      <p v-else>Valor Inválido</p>
     </fieldset>
 
   </div>
