@@ -28,6 +28,7 @@
     <fieldset>
       <legend>Computed Properties</legend>
       <p>Nome Completo: {{fullName}}</p>
+      <p>Nome Completo: {{getFullName()}}</p>
     </fieldset>
 
   </div>
@@ -48,6 +49,9 @@
         },
         decrementAge() {
           this.age--
+        },
+        getFullName() {
+          return `${this.firstName} ${this.lastName}`;
         }
       },
       computed: {
