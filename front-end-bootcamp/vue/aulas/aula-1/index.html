@@ -47,6 +47,12 @@
       <p v-else>Valor Inválido</p>
     </fieldset>
 
+    <fieldset>
+      <legend>V-show</legend>
+      <button v-show="!isUserLogged" @click="isUserLogged = true">Login</button>
+      <button v-show="isUserLogged" @click="isUserLogged = false">Logout</button>
+    </fieldset>
+
   </div>
   <script src="https://unpkg.com/vue@3.0.4"></script>
   <script>
@@ -58,7 +64,8 @@
           lastName: "Barbosa",
           age: 25,
           address: "",
-          grade: 0
+          grade: 0,
+          isUserLogged: false
         }
       },
       methods: {
