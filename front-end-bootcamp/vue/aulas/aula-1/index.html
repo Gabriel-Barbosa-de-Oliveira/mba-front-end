@@ -87,6 +87,13 @@
       </ul>
     </fieldset>
 
+    <fieldset>
+      <legend>V-Bind</legend>
+      <a v-bind:href="urlIgti" target="_blank">IGTI</a> 
+      <br>
+      <a :href="urlIgti" v-bind:[argument]="urlIgtiDescription" target="_blank">IGTI</a>
+    </fieldset>
+
 
 
   </div>
@@ -106,6 +113,9 @@
           carBrands: ["VW", "Fiat", "Renault", "Ford"],
           cars: [{ name: "Ka", brand: "Ford" }, { name: "Palio", brand: "Fiat" }],
           car: { name: "Ka", brand: "Ford", year: 2022 },
+          urlIgti: "https://www.igti.com.br",
+          urlIgtiDescription: "Clique aqui para acessar o site do IGTI",
+          argument: "Title"
         }
       },
       methods: {
