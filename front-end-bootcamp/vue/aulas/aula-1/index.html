@@ -31,6 +31,14 @@
       <p>Nome Completo: {{getFullName()}}</p>
     </fieldset>
 
+    <fieldset>
+      <legend>Watchers</legend>
+      <label for="input-address">Endereço: </label>
+      <input id="input-address" type="text" v-model="address">
+
+
+    </fieldset>
+
   </div>
   <script src="https://unpkg.com/vue@3.0.4"></script>
   <script>
@@ -40,7 +48,8 @@
           htmlContent: "<p style='color: red; font-size: 20px'>Hello World Vue.js!</p>",
           firstName: "Gabriel",
           lastName: "Barbosa",
-          age: 25
+          age: 25,
+          address: ""
         }
       },
       methods: {
@@ -56,6 +65,11 @@
       },
       computed: {
         fullName: function () { return this.firstName + " " + this.lastName }
+      },
+      watch: {
+        address: function(newValue, oldValue) {
+          console.log(newValue, oldValue)
+        }
       }
     }
 
