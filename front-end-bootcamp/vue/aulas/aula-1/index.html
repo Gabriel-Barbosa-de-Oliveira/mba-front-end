@@ -71,6 +71,22 @@
       <button @click="count++">Adicionar</button>
     </fieldset>
 
+    <fieldset>
+      <legend>V-For</legend>
+      <h4>Marcas</h4>
+      <ul>
+        <li v-for="brand in carBrands">{{brand}}</li>
+      </ul>
+      <h4>Carros</h4>
+      <ul>
+        <li v-for="car in cars">{{car.name}} ({{car.brand}})</li>
+      </ul>
+      <h4>Carro</h4>
+      <ul>
+        <li v-for="(value, key, index) in car">{{index}} - {{key}} - {{value}}</li>
+      </ul>
+    </fieldset>
+
 
 
   </div>
@@ -86,7 +102,10 @@
           address: "",
           grade: 0,
           isUserLogged: false,
-          count: 1
+          count: 1,
+          carBrands: ["VW", "Fiat", "Renault", "Ford"],
+          cars: [{ name: "Ka", brand: "Ford" }, { name: "Palio", brand: "Fiat" }],
+          car: { name: "Ka", brand: "Ford", year: 2022 },
         }
       },
       methods: {
