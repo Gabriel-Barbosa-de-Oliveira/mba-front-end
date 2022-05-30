@@ -94,6 +94,31 @@
       <a :href="urlIgti" v-bind:[argument]="urlIgtiDescription" target="_blank">IGTI</a>
     </fieldset>
 
+    <fieldset>
+      <legend>V-Model</legend>
+      <label for="input-firstName">Primeiro Nome: </label>
+      <input id="input-firstName" type="text" v-model="firstName">
+      <br>
+      <label for="text-area-html">HTML</label>
+      <textarea id="text-area-html" v-model="htmlContent"></textarea>
+      <br>
+      <label for="input-checkbox">{{checked}}</label>
+      <input id="input-checkbox" type="checkbox" v-model="checked">
+      <br>
+      <label for="input-um">Um</label>
+      <input id="input-um" type="radio" value="Um" v-model="selectedOption">
+      <br>
+      <label for="input-dois">Dois</label>
+      <input id="input-dois" type="radio" value="Dois" v-model="selectedOption">
+      <br>
+      <p>Opção Selecionada: {{selectedOption}}</p>
+      <select v-model="selectedCar">
+        <option v-for="car in cars" v-bind:value="car">{{car.name}} - {{car.brand}}</option>
+      </select> 
+      <br>
+      <p>Carro Selecionado: {{selectedCar.name}} - {{selectedCar.brand}}</p>
+    </fieldset>
+
 
 
   </div>
@@ -115,7 +140,10 @@
           car: { name: "Ka", brand: "Ford", year: 2022 },
           urlIgti: "https://www.igti.com.br",
           urlIgtiDescription: "Clique aqui para acessar o site do IGTI",
-          argument: "Title"
+          argument: "Title",
+          checked: false,
+          selectedOption: "",
+          selectedCar: {}
         }
       },
       methods: {
