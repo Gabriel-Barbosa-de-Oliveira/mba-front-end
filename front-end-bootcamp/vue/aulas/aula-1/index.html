@@ -53,6 +53,26 @@
       <button v-show="isUserLogged" @click="isUserLogged = false">Logout</button>
     </fieldset>
 
+    <fieldset>
+      <legend>V-Text</legend>
+      <p>{{firstName}}</p>
+      <p v-text="firstName"></p>
+    </fieldset>
+
+    <fieldset>
+      <legend>V-Html</legend>
+      <div v-html="htmlContent"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>V-Once</legend>
+      <p v-once>{{count}}</p>
+      <p>{{count}}</p>
+      <button @click="count++">Adicionar</button>
+    </fieldset>
+
+
+
   </div>
   <script src="https://unpkg.com/vue@3.0.4"></script>
   <script>
@@ -65,7 +85,8 @@
           age: 25,
           address: "",
           grade: 0,
-          isUserLogged: false
+          isUserLogged: false,
+          count: 1
         }
       },
       methods: {
