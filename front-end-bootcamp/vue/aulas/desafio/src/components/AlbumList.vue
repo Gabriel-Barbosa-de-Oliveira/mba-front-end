@@ -6,7 +6,7 @@
       class="div-album"
       v-for="(item, index) in list"
       :key="index"
-      @click="selectAlbum(1)"
+      @click="selectAlbum(item.id)"
     >
       {{ item.title }}
     </div>
