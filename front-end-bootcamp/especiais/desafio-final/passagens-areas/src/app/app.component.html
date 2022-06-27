@@ -16,7 +16,7 @@
     </div>
 
     <div>
-      <app-miles></app-miles>
+      <app-miles  (changed)="mapMiles($event)"></app-miles>
     </div>
 
     <button mat-button color="action" (click)="getTicketSummary()">
@@ -32,6 +32,7 @@
       <span>Distância: <ng-container *ngIf="distance">{{distance}} Km</ng-container></span>
       <span>{{adultsNumber}} Adulto(s), {{childrenNumber}} Criança(s)</span>
       <span>Tipo de Vôo: {{type}}</span>
+      <span>Milhas: {{miles}}</span>
     </section>
   </app-card>
 </section>

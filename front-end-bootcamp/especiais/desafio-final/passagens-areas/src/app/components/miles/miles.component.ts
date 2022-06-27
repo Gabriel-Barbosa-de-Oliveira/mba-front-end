@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-miles',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MilesComponent implements OnInit {
 
+  public miles: number = 0;
+
+  @Output() changed: EventEmitter<number> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  emitChange(){
+    this.changed.emit(this.miles)
   }
 
 }

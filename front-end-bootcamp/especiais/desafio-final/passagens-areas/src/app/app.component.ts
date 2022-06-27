@@ -17,6 +17,7 @@ export class AppComponent {
   public adultsNumber: number = 1;
   public childrenNumber: number = 0;
   public type: string = 'Econômica';
+  public miles: number = 0;
 
   constructor(
     private backendService: BackendService,
@@ -64,6 +65,10 @@ export class AppComponent {
       this.type = 'Executiva';
     }
   }
+
+  public mapMiles(miles: number){
+    this.miles = miles
+  } 
 
   public getTicketSummary(): void {
     this.distance = this.ticketCalculator
