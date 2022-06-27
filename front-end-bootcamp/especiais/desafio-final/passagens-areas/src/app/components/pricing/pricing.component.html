@@ -1,0 +1,18 @@
+<section class="princing-container">
+  <mat-form-field appearance="fill">
+    <mat-label>País de {{label}}</mat-label>
+    <mat-select [(ngModel)]="selectedCountry" (selectionChange)="countryChanged()">
+      <ng-container *ngFor="let country of countries; let i = index" >
+        <mat-option [value]="country">{{country.country}}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Cidade de {{label}}</mat-label>
+    <mat-select [(ngModel)]="selectedCity">
+      <ng-container *ngFor="let city of selectedCountry?.cities; let i = index">
+        <mat-option [value]="city" >{{city?.city}}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+</section>
