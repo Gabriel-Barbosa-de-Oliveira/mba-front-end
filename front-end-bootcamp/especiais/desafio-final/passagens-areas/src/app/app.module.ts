@@ -11,8 +11,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import { TicketsNumberComponent } from './components/tickets-number/tickets-number.component';
+import { MatButtonModule } from '@angular/material/button';
+import { TicketsTypeComponent } from './components/tickets-type/tickets-type.component';
+import { MilesComponent } from './components/miles/miles.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -20,6 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     PricingComponent,
     DetailsComponent,
     CardComponent,
+    TicketsNumberComponent,
+    TicketsTypeComponent,
+    MilesComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +40,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatCardModule,
     MatSelectModule,
-    HttpClientModule
+    MatButtonModule,
+    MatRadioModule,
+    HttpClientModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

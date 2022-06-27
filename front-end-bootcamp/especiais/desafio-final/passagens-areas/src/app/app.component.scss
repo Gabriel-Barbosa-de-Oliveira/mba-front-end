@@ -6,3 +6,14 @@
   margin: 0 auto;
   grid-gap: 16px;
 }
+
+.tickets-number-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tickets-type-container {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}

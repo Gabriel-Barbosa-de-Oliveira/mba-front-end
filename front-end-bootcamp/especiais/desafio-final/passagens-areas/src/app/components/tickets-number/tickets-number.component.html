@@ -1,0 +1,13 @@
+<section class="tickets-container">
+  <p>{{label}}</p>
+  <div class="action-container">
+
+    <button mat-mini-fab color="action" aria-label="Example icon button with a minus icon" (click)="removeTicket()">
+      -
+    </button>
+    <span class="item-count">{{ticketNumber}}</span>
+    <button mat-mini-fab color="action" aria-label="Example icon button with a plus icon" (click)="addTicket()">
+      +
+    </button>
+  </div>
+</section>

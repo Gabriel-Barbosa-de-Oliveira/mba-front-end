@@ -18,7 +18,6 @@ export class AppComponent {
 
   private getCountries(): void {
     this.backendService.getDataFromBackend().subscribe((countries) => {
-      console.log(countries);
       this.countries = countries;
     });
   }
