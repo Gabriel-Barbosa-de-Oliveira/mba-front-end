@@ -9,7 +9,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Cidade de {{label}}</mat-label>
-    <mat-select [(ngModel)]="selectedCity">
+    <mat-select [(ngModel)]="selectedCity" (selectionChange)="emitChanges()">
       <ng-container *ngFor="let city of selectedCountry?.cities; let i = index">
         <mat-option [value]="city" >{{city?.city}}</mat-option>
       </ng-container>

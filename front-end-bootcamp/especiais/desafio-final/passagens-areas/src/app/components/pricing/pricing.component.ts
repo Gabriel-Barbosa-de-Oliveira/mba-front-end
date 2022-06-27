@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pricing',
@@ -8,6 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PricingComponent implements OnInit {
   @Input() countries: Array<any> = [];
   @Input() label: 'Origem' | 'Destino' = 'Origem';
+  @Output() country: EventEmitter<string> = new EventEmitter();
+  @Output() city: EventEmitter<any> = new EventEmitter();
+
   public selectedCountry: any = null;
   public selectedCity: any = null;
 
@@ -17,5 +20,10 @@ export class PricingComponent implements OnInit {
 
   public countryChanged(): void {
     this.selectedCity = {};
+  }
+
+  public emitChanges(): void {
+    this.country.emit(this.selectedCountry.country);
+    this.city.emit(this.selectedCity);
   }
 }

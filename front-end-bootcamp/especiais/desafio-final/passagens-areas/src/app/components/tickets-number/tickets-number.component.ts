@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tickets-number',
@@ -10,6 +10,9 @@ export class TicketsNumberComponent implements OnInit {
 
   public ticketNumber: number = 0;
 
+  @Output()
+  public changedTickedNumber: EventEmitter<number> = new EventEmitter();
+
   constructor() {}
 
   ngOnInit(): void {
@@ -18,6 +21,7 @@ export class TicketsNumberComponent implements OnInit {
 
   addTicket() {
     this.ticketNumber++;
+    this.changedTickedNumber.emit(this.ticketNumber);
   }
 
   removeTicket() {
@@ -26,9 +30,10 @@ export class TicketsNumberComponent implements OnInit {
         this.ticketNumber--;
       }
     } else {
-      if (this.ticketNumber >= 0) {
+      if (this.ticketNumber > 0) {
         this.ticketNumber--;
       }
     }
+    this.changedTickedNumber.emit(this.ticketNumber);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tickets-type',
@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketsTypeComponent implements OnInit {
   public type: string = '1';
+  
+  @Output()
+  public changed: EventEmitter<string> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  changedType() {}
+  changedType() {
+    this.changed.emit(this.type);
+  }
 }

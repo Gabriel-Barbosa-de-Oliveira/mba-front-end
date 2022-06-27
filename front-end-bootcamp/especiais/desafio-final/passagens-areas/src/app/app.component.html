@@ -1,20 +1,37 @@
 <section class="cards-container">
   <app-card>
-    <app-pricing [countries]="countries" [label]="'Origem'"></app-pricing>
-    <app-pricing [countries]="countries" [label]="'Destino'"></app-pricing>
+    <app-pricing [countries]="countries" [label]="'Origem'" (country)="mapOriginCountry($event)"
+      (city)="mapOriginCity($event)"></app-pricing>
+
+    <app-pricing [countries]="countries" [label]="'Destino'" (country)="mapDestinationCountry($event)"
+      (city)="mapDestinationCity($event)"></app-pricing>
+
     <div class="tickets-number-container">
-      <app-tickets-number [label]="'Adulto'"></app-tickets-number>
-      <app-tickets-number [label]="'Criança'"></app-tickets-number>
+      <app-tickets-number [label]="'Adulto'" (changedTickedNumber)="mapAdultsNumber($event)"></app-tickets-number>
+      <app-tickets-number [label]="'Criança'" (changedTickedNumber)="mapChildrenNumber($event)"></app-tickets-number>
     </div>
+
     <div class="tickets-type-container">
-      <app-tickets-type></app-tickets-type>
+      <app-tickets-type (changed)="mapType($event)"></app-tickets-type>
     </div>
+
     <div>
       <app-miles></app-miles>
     </div>
+
+    <button mat-button color="action" (click)="getTicketSummary()">
+      Calcular
+    </button>
   </app-card>
 
   <app-card>
-    teste
+    <section class="summary-container">
+      <span>Origem: {{originCity?.city}} <ng-container *ngIf="originCountry">({{originCountry}})</ng-container></span>
+      <span>Destino: {{destinationCity?.city}} <ng-container *ngIf="destinationCountry">({{destinationCountry}})
+        </ng-container></span>
+      <span>Distância: <ng-container *ngIf="distance">{{distance}} Km</ng-container></span>
+      <span>{{adultsNumber}} Adulto(s), {{childrenNumber}} Criança(s)</span>
+      <span>Tipo de Vôo: {{type}}</span>
+    </section>
   </app-card>
 </section>
