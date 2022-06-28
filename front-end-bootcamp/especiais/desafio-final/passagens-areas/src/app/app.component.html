@@ -32,7 +32,11 @@
       <span>Distância: <ng-container *ngIf="distance">{{distance}} Km</ng-container></span>
       <span>{{adultsNumber}} Adulto(s), {{childrenNumber}} Criança(s)</span>
       <span>Tipo de Vôo: {{type}}</span>
+      <span>Total por adulto: {{totalAdults.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })}}</span>
+      <span>Tipo por criança: {{totalChildren.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })}}</span>
       <span>Milhas: {{miles}}</span>
+      <span>Valor abatido pelas milhas: {{miles * 0.02}}</span>
+      <span>Total: {{total.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })}}</span>
     </section>
   </app-card>
 </section>

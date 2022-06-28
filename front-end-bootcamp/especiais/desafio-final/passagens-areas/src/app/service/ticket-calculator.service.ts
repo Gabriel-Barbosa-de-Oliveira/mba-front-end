@@ -43,4 +43,47 @@ export class TicketCalculatorService {
     var pi = Math.PI;
     return degrees * (pi / 180);
   }
+
+  public getAdultsTicketTotal(
+    originCountryName: string,
+    destinationCountryName: string,
+    distance: number,
+    type: string,
+    isChild: boolean,
+    miles: number
+  ) {
+    let total: number = 0;
+    if (
+      this.checkIfCountryIsTheSame(originCountryName, destinationCountryName)
+    ) {
+      if (!isChild) {
+        total = distance * 0.3;
+      } else {
+        total = distance * 0.15;
+      }
+    } else {
+      if (!isChild) {
+        total = distance * 0.5;
+      } else {
+        total = distance * 0.25;
+      }
+    }
+
+    if (type.toLocaleLowerCase() === 'executiva') {
+      if (!isChild) {
+        total = total * 1.8;
+      } else {
+        total = total * 1.4;
+      }
+    }
+
+    return total;
+  }
+
+  private checkIfCountryIsTheSame(
+    originCountryName: string,
+    destinationCountryName: string
+  ) {
+    return originCountryName === destinationCountryName;
+  }
 }

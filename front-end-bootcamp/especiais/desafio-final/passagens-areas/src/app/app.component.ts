@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BackendService } from './service/backend.service';
 import { TicketCalculatorService } from './service/ticket-calculator.service';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,6 +18,9 @@ export class AppComponent {
   public childrenNumber: number = 0;
   public type: string = 'Econômica';
   public miles: number = 0;
+  public totalAdults: number = 0;
+  public totalChildren: number = 0;
+  public total: number = 0;
 
   constructor(
     private backendService: BackendService,
@@ -79,5 +82,11 @@ export class AppComponent {
         this.destinationCity.longitude
       )
       .toFixed(1);
+
+    this.totalAdults = _.round(this.ticketCalculator.getAdultsTicketTotal(this.originCountry, this.destinationCountry, this.distance, this.type, false, this.miles), 2);
+    this.totalAdults > 0 ? this.totalAdults : 0;
+    this.totalChildren = _.round(this.ticketCalculator.getAdultsTicketTotal(this.originCountry, this.destinationCountry, this.distance, this.type, true, this.miles), 2);
+    this.totalChildren > 0 ? this.totalChildren : 0;
+    this.total = _.round((this.totalAdults * this.adultsNumber) + (this.totalChildren * this.childrenNumber) - (this.miles * 0.02), 2)  ;
   }
 }
